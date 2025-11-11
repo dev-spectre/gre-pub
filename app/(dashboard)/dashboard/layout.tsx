@@ -1,14 +1,8 @@
-import { Montserrat, Poetsen_One } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import "@/app/globals.css";
 import { Sidebar } from "@/components/Navbar";
 import { Metadata } from "next/types";
 import Link from "next/link";
-
-const poetsenOne = Poetsen_One({
-  weight: ["400"],
-  subsets: ["latin"],
-  variable: "--font-poetsen-one",
-});
 
 const montserrat = Montserrat({
   weight: ["400", "500"],
@@ -25,7 +19,7 @@ export default function DashboardLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${montserrat.variable} ${poetsenOne.variable}`}>
+    <html lang="en" className={`${montserrat.variable}`}>
       <head>
         <meta name="darkreader-lock" />
       </head>
@@ -35,7 +29,7 @@ export default function DashboardLayout({
         <Sidebar />
         <div className="mt-4.5 mr-4 flex items-center justify-between rounded-md border border-[#E5E5E5] bg-white px-5 py-5">
           <Link href={"/"}>
-            <h1 className="font-poetsen-one text-xl font-[400] text-[#1B438F]">
+            <h1 className="font-montserrat text-xl font-[400] text-[#1B438F]">
               GRE NextEra
             </h1>
           </Link>

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Button } from "./Button";
 
 interface InfoCardProps {
@@ -9,16 +8,14 @@ interface InfoCardProps {
 
 export function InfoCard({ title, description, imgSrc }: InfoCardProps) {
   return (
-    <section className="font-inter max-w-[263px] rounded-xl bg-white px-5 py-6 text-center capitalize shadow-lg">
-      <h3 className="text-2xl font-[400]">{title}</h3>
-      <Image
-        className="mx-auto my-9 rounded-full border-2 border-[#FF9053] px-3 py-3"
+    <section className="flex hover:scale-105 transition-transform ease-in max-w-[263px] flex-col justify-between rounded-xl bg-white px-3 py-4 text-center capitalize shadow-lg xl:px-5 xl:py-6">
+      <h3 className="text-sm font-[400] sm:text-lg xl:text-2xl">{title}</h3>
+      <img
+        className="mx-auto my-4 h-20 w-20 rounded-full border-2 border-[#FF9053] px-3 py-3 sm:my-9 sm:h-[100px] sm:w-[100px]"
         src={imgSrc}
         alt=""
-        width={"100"}
-        height={"100"}
       />
-      <p className="font-[300]">{description}</p>
+      <p className="text-xs font-[300] sm:text-base">{description}</p>
     </section>
   );
 }
@@ -36,11 +33,11 @@ export function CourseFeaturesCard() {
   ];
 
   return (
-    <article className="font-inter inline-block rounded-3xl bg-white px-32 py-12 text-lg font-[400] shadow-lg shadow-[#1B438F4D]">
-      <h2 className="font-roboto text-4xl font-[900] text-[#1B438F] uppercase">
+    <article className="inline-block rounded-2xl bg-white px-6 py-5 text-lg font-[400] shadow-lg shadow-[#1B438F4D] sm:px-10 sm:py-10 md:rounded-3xl md:px-32 md:py-12">
+      <h2 className="text-2xl font-[900] text-[#1B438F] uppercase sm:text-4xl">
         GRE 330 Course
       </h2>
-      <p className="font-[600] capitalize">
+      <p className="text-base font-[600] capitalize sm:text-base">
         World's most affordable complete <span className="uppercase">GRE</span>{" "}
         prep
       </p>
@@ -51,13 +48,13 @@ export function CourseFeaturesCard() {
             key={i}
             className="mt-2 flex items-center gap-2.5 border-b border-b-[#1B438F80] pb-2"
           >
-            <div className="min-h-8 min-w-8 gap-2.5 rounded-full border border-[#FF9053]"></div>
-            <p className="text-[#211C37]">{feature}</p>
+            <div className="min-h-4 min-w-4 gap-2.5 rounded-full border border-[#FF9053] md:min-h-8 md:min-w-8"></div>
+            <p className="text-sm text-[#211C37] sm:text-base">{feature}</p>
           </li>
         ))}
       </ul>
 
-      <div className="text-white">
+      <div className="text-sm text-white sm:text-base">
         <Button label="Subscribe now" />
       </div>
     </article>
@@ -72,7 +69,6 @@ interface TestimonialCardProps {
   linkedin: string;
   designation: string;
   imgSrc: string;
-  caption?: boolean;
 }
 
 export function TestimonialCard({
@@ -83,10 +79,9 @@ export function TestimonialCard({
   designation,
   linkedin,
   imgSrc,
-  caption,
 }: TestimonialCardProps) {
   return (
-    <article className="font-urbanist relative grid min-h-[450px] max-w-5xl grid-cols-10 gap-12 rounded-2xl bg-white px-30 py-14.5">
+    <article className="grid hover:scale-105 transition-all ease-in max-w-5xl w-[90%] grid-cols-10 gap-3 sm:gap-12 rounded-2xl bg-white md:px-15 sm:py-6 sm:px-8 px-5 py-3 md:py-7 lg:px-30 lg:py-14.5">
       <div className="relative col-span-4">
         <img
           className="absolute top-0 -left-5"
@@ -94,30 +89,35 @@ export function TestimonialCard({
           alt="quote"
         />
         <img
-          className="absolute top-10 h-[120%] max-w-[300px] rounded-full object-cover"
+          className="absolute lg:h-[120%] top-10 h-[110%] max-w-[100%] rounded-full object-cover"
           src={imgSrc}
           alt={name}
         />
       </div>
       <section className="col-span-6">
-        <h3 className="mb-6 text-3xl font-[800]">{title}</h3>
-        <p className="mb-12 text-xl font-[600] text-[#626262] italic">
+        <h3 className="md:mb-6 sm:mb-5 mb-3 text-base sm:text-xl font-[800] md:text-2xl xl:text-3xl">
+          {title}
+        </h3>
+        <p className="md:mb-12 sm:mb-5 mb-3 text-xs font-[600] text-[#626262] italic md:text-lg xl:text-xl">
           {description}
         </p>
-        <div className="mb-3.5 flex gap-13 text-[#1B438F]">
-          <p className="text-4xl font-[900]">{greScore}/330</p>
+        <div className="mb-3.5 flex lg:gap-13 md:gap-10 sm:gap-9 gap-6 text-[#1B438F]">
+          <p className="sm:text-2xl text-lg font-[900] md:text-3xl xl:text-4xl">
+            {greScore}/330
+          </p>
           <a href={linkedin}>
-            <img src="/icons/linkedin.svg" alt="LinkedIn" />
+            <img
+              className="md:h-6 md:w-6 lg:h-8 lg:w-8 sm:h-5 sm:w-5 h-4 w-4"
+              src="/icons/linkedin.svg"
+              alt="LinkedIn"
+            />
           </a>
         </div>
-        <p className="text-2xl font-[900]">{name}</p>
-        <p className="text-lg font-[500] text-[#21967B]">{designation}</p>
-      </section>
-      {caption && (
-        <p className="font-roboto absolute right-0 -bottom-15 text-4xl font-[900] text-white">
-          Our Student, Our Pride
+        <p className="text-sm font-[900] sm:text-lg md:text-xl lg:text-2xl">
+          {name}
         </p>
-      )}
+        <p className="xl:text-lg md:text-base sm:text-sm text-xs font-[500] text-[#21967B]">{designation}</p>
+      </section>
     </article>
   );
 }

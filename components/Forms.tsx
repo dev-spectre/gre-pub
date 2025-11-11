@@ -1,18 +1,18 @@
-import Image from "next/image";
+import { Button } from "./Button";
 
 export function LeadGenerationForm() {
   return (
-    <div className="to-black-40 inline-block rounded-xl max-w-lg w-full bg-black/20 bg-gradient-to-b from-black/20 via-black/15 to-black/20 px-8 py-11 text-white backdrop:blur-2xl">
-      <h2 className="font-roboto mb-6 text-4xl font-[900] capitalize">
-        Get free <span className="uppercase">GRE</span> strategy
+    <div className="inline-block rounded-xl py-1">
+      <h2 className="mb-6 text-2xl font-[900] text-[#1B438F] capitalize sm:text-4xl">
+        Request for a demo session
       </h2>
-      <form>
+      <form className="flex flex-col gap-2 text-sm text-[#1F1D39] sm:gap-4 sm:text-base">
         <div>
           <label className="block" htmlFor="name">
             Name
           </label>
           <input
-            className="mt-2 mb-3 h-8 w-full rounded-md bg-black/12 px-2 placeholder:text-white backdrop:blur-2xl"
+            className="mt-2 mb-3 h-8 w-full rounded-md bg-black/5 px-2"
             placeholder="Eg.: Abhishek"
             type="text"
             id="name"
@@ -23,7 +23,7 @@ export function LeadGenerationForm() {
             Email ID
           </label>
           <input
-            className="mt-2 mb-3 h-8 w-full rounded-md bg-black/12 px-2 placeholder:text-white backdrop:blur-2xl"
+            className="mt-2 mb-3 h-8 w-full rounded-md bg-black/5 px-2"
             placeholder="Eg.: abhishek@example.com"
             type="email"
             id="email"
@@ -38,26 +38,22 @@ export function LeadGenerationForm() {
             type="text"
             id="contactNumber"
             pattern="+[0-9]{1,3}-[0-9]{10}"
-            className="mt-2 mb-3 h-8 w-full rounded-md bg-black/12 px-2 placeholder:text-white backdrop:blur-2xl"
+            className="mt-2 mb-3 h-8 w-full rounded-md bg-black/5 px-2"
           />
         </div>
         <div>
           <label className="block" htmlFor="course">
-            Course
+            Message
           </label>
-          <div className="mt-2 mb-3 flex h-8 items-center justify-between rounded-md bg-black/12 px-2 hover:cursor-pointer">
-            <p>Select Course</p>
-            <Image
-              src="/icons/chevron-down.svg"
-              alt="Options"
-              width="25"
-              height="25"
-            />
-          </div>
+          <textarea
+            className="mt-2 mb-3 h-36 w-full resize-none rounded-md bg-black/5 px-2 py-1"
+            placeholder="Eg.: GRE Universe Course"
+            id="course"
+          />
         </div>
-        <button className="mt-3 w-full rounded-md bg-[#1F1D39] px-3 py-2">
-          Submit
-        </button>
+        <div className="text-white">
+          <Button label="Submit" />
+        </div>
       </form>
     </div>
   );

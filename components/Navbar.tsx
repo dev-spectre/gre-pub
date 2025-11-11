@@ -2,36 +2,53 @@ import Link from "next/link";
 
 export default function Navbar() {
   return (
-    <div className="fixed top-0 right-0 left-0 z-30 backdrop-blur">
-      <nav className="container mx-auto flex justify-between px-5 py-6 text-white">
-        <Link href="/" className="font-roboto text-2xl font-[900]">
-          GRE NextEra
-        </Link>
-        <ul className="font-inter flex gap-12 text-2xl font-[600]">
+    <div className="font-montserrat fixed top-0 right-0 left-0 z-30 backdrop-blur bg-black/4">
+      <nav className="container mx-auto flex items-center justify-between px-5 py-6 text-white">
+        <div>
+          <button>
+            <div className="mr-5 xl:hidden">
+              <div className="h-0.5 w-4 rounded bg-white"></div>
+              <div className="my-1 h-0.5 w-4 rounded bg-white"></div>
+              <div className="h-0.5 w-4 rounded bg-white"></div>
+            </div>
+          </button>
+          <Link href="/" className="text-2xl font-[900]">
+            PM Prep
+          </Link>
+        </div>
+        <ul className="hidden gap-12 font-[600] capitalize lg:text-lg xl:flex xl:text-xl 2xl:text-2xl">
           <li>
             <a href="#" className="underline hover:underline">
-              Home
+              Universe course
             </a>
           </li>
           <li>
-            <a href="#about" className="hover:underline">
-              About
+            <a
+              href="#private-personalised-tutoring"
+              className="hover:underline"
+            >
+              Private personalised tutoring
             </a>
           </li>
           <li>
             <a href="#courses" className="hover:underline">
-              Courses
+              Student results
+            </a>
+          </li>
+          <li>
+            <a href="#instructor" className="hover:underline">
+              Instructor
             </a>
           </li>
           <li>
             <a href="#testimonials" className="hover:underline">
-              Testimonials
+              Contact
             </a>
           </li>
         </ul>
         <Link
           href="/dashboard"
-          className="font-poppins rounded-md border border-white px-3 py-1 text-lg font-[400]"
+          className="rounded-md border border-white px-3 py-1 text-sm font-[400] lg:text-lg xl:flex xl:text-xl 2xl:text-2xl"
         >
           Login
         </Link>
@@ -43,77 +60,104 @@ export default function Navbar() {
 export function FooterNav() {
   return (
     <div className="bg-gradient-to-b from-[#0f2247] to-[#0B172D] pt-20">
-      <footer className="bg-black/15 px-36 pt-13 text-white backdrop:blur">
-        <div className="flex items-center justify-between border-b border-b-white pb-8">
-          <Link href="/" className="font-poppins text-2xl font-[400]">
-            GRE NextEra
+      <footer className="bg-black/15 px-5 pt-13 text-white backdrop:blur sm:px-8 md:px-12 lg:px-36">
+        {/* Header */}
+        <div className="mb-5 flex items-center justify-between border-b border-b-white pb-8">
+          <Link href="/" className="text-xl font-[400] md:text-2xl">
+            PM Prep
           </Link>
-          <ul className="flex gap-8">
+          <ul className="flex gap-3 sm:gap-8">
             <li>
               <a href="#">
-                <img src="/icons/facebook.svg" alt="Facebook" />
+                <img
+                  className="h-6 w-6 sm:h-7 sm:w-7 md:h-auto md:w-auto"
+                  src="/icons/facebook.svg"
+                  alt="Facebook"
+                />
               </a>
             </li>
             <li>
               <a href="#">
-                <img src="/icons/instagram.svg" alt="Instagram" />
+                <img
+                  className="h-6 w-6 sm:h-7 sm:w-7 md:h-auto md:w-auto"
+                  src="/icons/instagram.svg"
+                  alt="Instagram"
+                />
               </a>
             </li>
             <li>
               <a href="#">
-                <img src="/icons/twitter.svg" alt="X (Twitter)" />
+                <img
+                  className="h-6 w-6 sm:h-7 sm:w-7 md:h-auto md:w-auto"
+                  src="/icons/twitter.svg"
+                  alt="X (Twitter)"
+                />
               </a>
             </li>
             <li>
               <a href="#">
-                <img src="/icons/youtube.svg" alt="Youtube" />
+                <img
+                  className="h-6 w-6 sm:h-7 sm:w-7 md:h-auto md:w-auto"
+                  src="/icons/youtube.svg"
+                  alt="Youtube"
+                />
               </a>
             </li>
           </ul>
         </div>
-        <div className="mt-4.5 grid grid-cols-2 grid-rows-2 gap-7 pb-24">
-          <div>
-            <h4 className="font-inter text-xl font-[500] uppercase">Company</h4>
-            <ul className="font-poppins flex gap-6 text-lg font-[400] text-[#A19FBA]">
-              <li>
-                <a href={"#"}>Home</a>
-              </li>
-              <li>
-                <a href={"#courses"}>Courses</a>
-              </li>
-              <li>
-                <a href={"#about"}>About Us</a>
-              </li>
-              <li>
-                <a href={"#testimonials"}>Testimonials</a>
-              </li>
-            </ul>
+
+        {/* Main */}
+        <div className="mt-4.5 gap-16 pb-24 sm:flex">
+          <div className="mb-5 flex flex-col gap-5">
+            <div>
+              <h4 className="mb-2 text-lg font-[500] uppercase md:text-xl">
+                Company
+              </h4>
+              <ul className="flex flex-wrap gap-3 text-base font-[400] text-[#A19FBA] md:flex-row md:gap-6 md:text-lg">
+                <li>
+                  <a href={"#"}>Home</a>
+                </li>
+                <li>
+                  <a href={"#courses"}>Courses</a>
+                </li>
+                <li>
+                  <a href={"#about"}>About Us</a>
+                </li>
+                <li>
+                  <a href={"#testimonials"}>Testimonials</a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="mb-2 text-lg font-[500] uppercase md:text-xl">
+                Important Links
+              </h4>
+              <ul className="flex flex-wrap gap-3 text-base font-[400] text-[#A19FBA] md:text-lg">
+                <li>
+                  <Link href="#">Faq's</Link>
+                </li>
+                <li>
+                  <Link href="#">Privacy Policy</Link>
+                </li>
+                <li>
+                  <Link href="#">Terms and Conditions</Link>
+                </li>
+              </ul>
+            </div>
           </div>
-          <div>
-            <h4 className="font-inter text-xl font-[500]">Mail</h4>
-            <p className="text-xl text-[#A19FBA]">contact@gre.com</p>
-          </div>
-          <div>
-            <h4 className="font-inter text-xl font-[500] uppercase">
-              Important Links
-            </h4>
-            <ul className="font-poppins flex gap-6 text-lg font-[400] text-[#A19FBA]">
-              <li>
-                <Link href="#">Faq's</Link>
-              </li>
-              <li>
-                <Link href="#">Privacy Policy</Link>
-              </li>
-              <li>
-                <Link href="#">Terms and Conditions</Link>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-inter text-xl font-[500]">Phone</h4>
-            <p className="font-poppins text-xl font-[400] text-[#A19FBA]">
-              +91 - 9022 821 921
-            </p>
+          <div className="flex flex-wrap gap-5 sm:flex-col">
+            <div>
+              <h4 className="mb-2 text-lg font-[500] md:text-xl">Mail</h4>
+              <p className="text-base text-[#A19FBA] md:text-xl">
+                contact@gre.com
+              </p>
+            </div>
+            <div>
+              <h4 className="mb-2 text-lg font-[500] md:text-xl">Phone</h4>
+              <p className="text-base font-[400] text-[#A19FBA] md:text-xl">
+                +91 - 9022 821 921
+              </p>
+            </div>
           </div>
         </div>
       </footer>
@@ -124,7 +168,7 @@ export function FooterNav() {
 export function Sidebar() {
   return (
     <>
-      <aside className="group border-r border-r-[#E5E5E5] row-span-2 inline-block min-h-[100lvh] min-w-24 bg-white px-6.5 pt-8.5">
+      <aside className="group row-span-2 inline-block min-h-[100lvh] min-w-24 border-r border-r-[#E5E5E5] bg-white px-6.5 pt-8.5">
         <label htmlFor="menu-btn" className="mb-8 ml-2 inline-block">
           <img src="/icons/menu.png" alt="" />
         </label>
