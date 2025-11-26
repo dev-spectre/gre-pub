@@ -5,48 +5,35 @@ import Link from "next/link";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
+  const navLinks = [
+    { href: "/#courses", label: "Universe course" },
+    {
+      href: "/#private-personalised-tutoring",
+      label: "Private personalised tutoring",
+    },
+    { href: "/#testimonials", label: "Student results" },
+    { href: "/#instructor", label: "Instructor" },
+    { href: "/#request-demo-form", label: "Contact" },
+  ];
+
   return (
     <div className="font-montserrat sticky top-0 right-0 left-0 z-60 bg-gradient-to-b from-[#081329] to-[#081329]">
-      <nav className="relative container mx-auto flex items-center justify-between px-5 py-6 text-white">
+      <nav className="px-fluid-container relative flex items-center justify-between py-6 text-white">
         <Link href="/" className="text-2xl font-[900]">
           PM Prep
         </Link>
 
-        <ul className="hidden gap-8 font-[600] capitalize lg:text-lg xl:flex">
-          <li>
-            <a href="#" className="hover:scale-105 transition-all duration-200 ease-in">
-              Universe course
-            </a>
-          </li>
-          <li>
-            <a
-              href="#private-personalised-tutoring"
-              className="hover:scale-105 transition-all duration-200 ease-in"
-            >
-              Private personalised tutoring
-            </a>
-          </li>
-          <li>
-            <a href="#courses" className="hover:scale-105 transition-all duration-200 ease-in">
-              Student results
-            </a>
-          </li>
-          <li>
-            <a
-              href="#instructor"
-              className="hover:scale-105 transition-all duration-200 ease-in"
-            >
-              Instructor
-            </a>
-          </li>
-          <li>
-            <a
-              href="#testimonials"
-              className="hover:scale-105 transition-all duration-200 ease-in"
-            >
-              Contact
-            </a>
-          </li>
+        <ul className="hidden gap-8 font-[600] capitalize xl:flex 2xl:text-lg">
+          {navLinks.map(({ href, label }, index) => (
+            <li key={index}>
+              <Link
+                href={href}
+                className="transition-all duration-200 ease-in hover:scale-105"
+              >
+                {label}
+              </Link>
+            </li>
+          ))}
         </ul>
 
         <div className="flex items-center gap-4">
@@ -82,51 +69,17 @@ export default function Navbar() {
         }`}
       >
         <ul className="flex flex-col gap-6 p-6 text-center font-[600] capitalize">
-          <li>
-            <a
-              href="#"
-              onClick={() => setIsOpen(false)}
-              className="block py-2 hover:text-gray-300"
-            >
-              Universe course
-            </a>
-          </li>
-          <li>
-            <a
-              href="#private-personalised-tutoring"
-              onClick={() => setIsOpen(false)}
-              className="block py-2 hover:text-gray-300"
-            >
-              Private personalised tutoring
-            </a>
-          </li>
-          <li>
-            <a
-              href="#courses"
-              onClick={() => setIsOpen(false)}
-              className="block py-2 hover:text-gray-300"
-            >
-              Student results
-            </a>
-          </li>
-          <li>
-            <a
-              href="#instructor"
-              onClick={() => setIsOpen(false)}
-              className="block py-2 hover:text-gray-300"
-            >
-              Instructor
-            </a>
-          </li>
-          <li>
-            <a
-              href="#testimonials"
-              onClick={() => setIsOpen(false)}
-              className="block py-2 hover:text-gray-300"
-            >
-              Contact
-            </a>
-          </li>
+          {navLinks.map(({ href, label }, index) => (
+            <li key={index}>
+              <Link
+                href={href}
+                onClick={() => setIsOpen(false)}
+                className="block py-2 hover:text-gray-300"
+              >
+                {label}
+              </Link>
+            </li>
+          ))}
         </ul>
       </div>
     </div>
@@ -136,7 +89,7 @@ export default function Navbar() {
 export function FooterNav() {
   return (
     <div className="bg-gradient-to-b from-[#0f2247] to-[#0B172D] pt-20">
-      <footer className="bg-black/15 px-5 pt-13 text-white backdrop:blur sm:px-8 md:px-12 lg:px-36">
+      <footer className="px-fluid-container bg-black/15 pt-13 text-white backdrop:blur sm:px-8 md:px-12 lg:px-36">
         {/* Header */}
         <div className="mb-5 flex items-center justify-between border-b border-b-white pb-8">
           <Link href="/" className="text-xl font-[400] md:text-2xl">
@@ -144,31 +97,31 @@ export function FooterNav() {
           </Link>
           <ul className="flex items-center gap-3 sm:gap-8">
             <li>
-              <a href="#">
+              <Link href="#">
                 <img
                   className="h-6 w-6 sm:h-7 sm:w-7 md:h-auto md:w-auto"
                   src="/icons/instagram.svg"
                   alt="Instagram"
                 />
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#">
+              <Link href="#">
                 <img
                   className="h-6 w-6 sm:h-7 sm:w-7 md:h-auto md:w-auto"
                   src="/icons/youtube.svg"
                   alt="Youtube"
                 />
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#">
+              <Link href="#">
                 <img
-                  className="h-6 w-6 sm:h-7 sm:w-7 md:h-auto md:w-auto"
+                  className="h-6 w-6 sm:h-7 sm:w-7"
                   src="/icons/linkedin-nav.svg"
                   alt="LinkedIn"
                 />
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -182,19 +135,21 @@ export function FooterNav() {
               </h4>
               <ul className="flex flex-col flex-wrap gap-3 text-base font-[400] text-[#A19FBA] capitalize sm:flex-row md:flex-row md:gap-6 md:gap-y-2 md:text-lg">
                 <li>
-                  <a href={"#testimonials"}>Home</a>
+                  <Link href={"/"}>Home</Link>
                 </li>
                 <li>
-                  <a href={"#"}>Universe course</a>
+                  <Link href={"/#courses"}>Universe course</Link>
                 </li>
                 <li>
-                  <a href={"#courses"}>Private personalised tutoring</a>
+                  <Link href={"/#private-personalised-tutoring"}>
+                    Private personalised tutoring
+                  </Link>
                 </li>
                 <li>
-                  <a href={"#about"}>Student results</a>
+                  <Link href={"/#testimonials"}>Student results</Link>
                 </li>
                 <li>
-                  <a href={"#testimonials"}>Instructor</a>
+                  <Link href={"/#instructor"}>Instructor</Link>
                 </li>
               </ul>
             </div>
@@ -204,10 +159,13 @@ export function FooterNav() {
               </h4>
               <ul className="flex flex-wrap gap-3 text-base font-[400] text-[#A19FBA] md:text-lg">
                 <li>
-                  <Link href="#">Privacy Policy</Link>
+                  <Link href="/privacy">Privacy Policy</Link>
                 </li>
                 <li>
-                  <Link href="#">Terms and Conditions</Link>
+                  <Link href="/terms">Terms and Conditions</Link>
+                </li>
+                <li>
+                  <Link href="/refund">Refund and Cancellation Policy</Link>
                 </li>
               </ul>
             </div>
@@ -215,14 +173,14 @@ export function FooterNav() {
           <div className="flex flex-wrap gap-5 sm:flex-col">
             <div>
               <h4 className="mb-2 text-lg font-[500] md:text-xl">Mail</h4>
-              <p className="text-base text-[#A19FBA] md:text-xl">
-                contact@gre.com
+              <p className="text-base text-[#A19FBA] md:text-lg">
+                hello@punitmishraprep.com
               </p>
             </div>
             <div>
               <h4 className="mb-2 text-lg font-[500] md:text-xl">Phone</h4>
-              <p className="text-base font-[400] text-[#A19FBA] md:text-xl">
-                +91 - 9022 821 921
+              <p className="text-base font-[400] text-[#A19FBA] md:text-lg">
+                +91 - 9910 917 049
               </p>
             </div>
           </div>
@@ -243,43 +201,43 @@ export function Sidebar() {
         <nav className="peer-[:not(:checked)]:min-w-44">
           <ul className="space-y-3">
             <li>
-              <a
+              <Link
                 href="#"
                 className="flex items-center gap-2 rounded bg-[#1B438F1A] px-2 py-2"
               >
                 <img src="/icons/view-grid.png" alt="" />
                 <p>Dashboard</p>
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="#"
                 className="flex items-center gap-2 rounded px-2 py-2 hover:bg-[#1B438F1A]"
               >
                 <img src="/icons/class-lesson.png" alt="" />
                 <p>Courses</p>
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="#"
                 className="flex items-center gap-2 rounded px-2 py-2 hover:bg-[#1B438F1A]"
               >
                 <img src="/icons/university.png" alt="" />
                 <p>Universites</p>
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="#"
                 className="flex items-center gap-2 rounded px-2 py-2 hover:bg-[#1B438F1A]"
               >
                 <img src="/icons/documents.png" alt="" />
                 <p>Documents</p>
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="#"
                 className="flex items-center gap-2 rounded px-2 py-2 hover:bg-[#1B438F1A]"
               >
@@ -289,7 +247,7 @@ export function Sidebar() {
                   alt=""
                 />
                 <p>Mock test</p>
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>

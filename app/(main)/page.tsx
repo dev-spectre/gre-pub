@@ -1,5 +1,5 @@
 import { TestimonialCarousel } from "@/components/Animations";
-import { Button } from "@/components/Button";
+import { Button, ButtonLink } from "@/components/Button";
 import { CourseFeaturesCard, InfoCard } from "@/components/Cards";
 import { LeadGenerationForm } from "@/components/Forms";
 import Hero from "@/components/Hero";
@@ -27,12 +27,12 @@ export default function Home() {
     <>
       <Hero />
       <main>
-        <div className="bg-gradient-to-b from-[#1b428e] to-[#e7ecf4]">
+        <div className="grid grid-cols-1 place-items-center bg-gradient-to-b from-[#1b428e] to-[#e7ecf4]">
           <section
             id="about"
-            className="container mx-auto flex flex-col items-center px-5 lg:pb-5"
+            className="px-fluid-container flex flex-col items-center lg:pb-5"
           >
-            <h2 className="font-montserrat mb-10 text-center text-2xl font-[900] text-white capitalize sm:text-3xl md:mb-16 md:text-4xl lg:mb-20">
+            <h2 className="text-xl-0 mb-10 text-center leading-tight font-[900] text-white capitalize md:mb-16 lg:mb-20">
               Why join Universe Course?
             </h2>
             <div className="row-auto grid max-w-fit grid-cols-2 gap-3 md:gap-6 lg:grid-cols-4">
@@ -61,18 +61,18 @@ export default function Home() {
         </div>
         <div
           id="courses"
-          className="bg-gradient-to-b from-[#e7ecf4] to-[#bec9df] px-5"
+          className="bg-gradient-to-b scroll-mt-5 from-[#e7ecf4] to-[#bec9df]"
         >
-          <div className="container mx-auto flex items-center justify-center py-24 lg:min-h-[90vh]">
+          <div className="px-fluid-container flex items-center justify-center py-24 lg:min-h-[90vh]">
             <CourseFeaturesCard />
           </div>
           <section
             id="private-personalised-tutoring"
-            className="container mx-auto px-5 pt-12 pb-21"
+            className="px-fluid-container pt-12 pb-21 scroll-mt-16"
           >
             <div className="flex flex-wrap items-center justify-center gap-12 text-[#1F1D39]">
               <article className="inline-block rounded-2xl bg-white px-6 py-5 text-lg font-[400] shadow-lg shadow-[#1B438F4D] sm:px-8 sm:py-10 md:rounded-3xl md:px-12 md:py-12">
-                <h2 className="pb-8 text-start text-2xl font-[900] text-[#1B438F] sm:text-4xl">
+                <h2 className="text-xl-0 pb-8 text-center leading-tight font-[900] text-[#1B438F]">
                   Private Personalized Tutoring
                 </h2>
                 <ul className="divide-y divide-[#1B438F33] border-y border-y-[#1B438F33]">
@@ -80,7 +80,7 @@ export default function Home() {
                     <li key={key} className="">
                       <div
                         key={`${data}-${key}`}
-                        className="px-2.5 py-2 text-sm sm:text-base"
+                        className="text-sm-0 px-2.5 py-2 text-pretty"
                       >
                         <div className="flex items-center gap-2.5">
                           <div className="min-h-2.5 min-w-2.5 gap-2.5 rounded-full border border-[#FF9053] bg-[#FF90534D]"></div>
@@ -91,10 +91,12 @@ export default function Home() {
                   ))}
                 </ul>
                 <div className="pt-8 pr-2.5 text-white">
-                  <Button label="Know more" />
+                  <ButtonLink href="/#request-demo-form" label="Know more" />
                 </div>
               </article>
-              <LeadGenerationForm />
+              <div id="request-demo-form" className="scroll-mt-28">
+                <LeadGenerationForm />
+              </div>
             </div>
           </section>
         </div>
@@ -103,77 +105,69 @@ export default function Home() {
       <div className="bg-gradient-to-b from-[#1c4490] to-[#0f2247]">
         <section
           id="testimonials"
-          className="relative flex items-center justify-center overflow-hidden pt-16 pb-38"
+          className="relative scroll-mt-28 flex items-center justify-center overflow-hidden pt-8 pb-16"
         >
           <TestimonialCarousel
             testimonialsData={[
               {
-                imgSrc: "/images/victoria.jpg",
-                title: "Best Course for GRE exams",
+                imgSrc: "/images/siddharth.jpeg",
+                title: "The Blueprint for My GRE Success.",
                 description:
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices",
+                  "Initially, I was very confused, but then I discovered Millionaire GRE, and it worked like magic. Without using any flattery, I can say that the strategies for both the quant and verbal sections led to a tremendous improvement. I would personally recommend Millionaire GRE.",
                 greScore: "328",
-                designation: "Standford Odio Co.",
-                name: "Victoria Wotton",
-                linkedin: "#",
+                designation: "",
+                name: "Siddharth Kumar",
+                linkedin:
+                  "https://www.linkedin.com/in/siddharth-kumar-a68099145/ ",
               },
               {
-                imgSrc: "/images/victoria.jpg",
-                title: "Best Course for GRE exams",
+                imgSrc: "/images/sameer-jain.jpg",
+                title: "Personalized Plan, Foundational Results.",
                 description:
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices",
-                greScore: "328",
-                designation: "Standford Odio Co.",
-                name: "Victoria Wotton 1",
-                linkedin: "#",
+                  "Punit created a clear, personalized study plan that accounted for my work schedule. What stood out was his unique ability to identify and correct the root cause of my mistakes at a fundamental level. Highly recommended!",
+                greScore: "321",
+                designation: "Growth Manager, Ten x You",
+                name: "Sameer Jain",
+                linkedin: "https://www.linkedin.com/in/sameer-jain-bb153716a/",
               },
               {
-                imgSrc: "/images/victoria.jpg",
-                title: "Best Course for GRE exams",
+                imgSrc: "/images/aryani.jpeg",
+                title: "Deep Content Mastery, Simplified Learning.",
                 description:
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices",
-                greScore: "328",
-                designation: "Standford Odio Co.",
-                name: "Victoria Wotton 2",
-                linkedin: "#",
+                  "Punit has a deep understanding of the GRE content and structure, effectively guiding students through challenging sections. He truly sets himself apart by breaking down complex concepts into easy-to-understand explanations, fostering confidence and motivation.",
+                greScore: "318",
+                designation: "",
+                name: "Aaryani Dogra",
+                linkedin:
+                  "https://www.linkedin.com/in/aaryani-dogra-08426717b/",
               },
               {
-                imgSrc: "/images/victoria.jpg",
-                title: "Best Course for GRE exams",
+                imgSrc: "/images/pranit-jain.jpeg",
+                title: "Structure Meets Empathy.",
                 description:
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices",
-                greScore: "328",
-                designation: "Standford Odio Co.",
-                name: "Victoria Wotton 3",
-                linkedin: "#",
+                  "Punit Sir is an incredibly supportive GRE coach who is flexible and tailors study plans and class timings to your needs. His material is well-structured, and he excels at creating personalized workflows to keep you on track. He’s also one of the rare teachers available even on WhatsApp for doubt-solving and motivational support.",
+                greScore: "336",
+                designation: "Investment Analyst, IFC",
+                name: "Pranit Jain",
+                linkedin: "https://www.linkedin.com/in/pranit-jain14/",
               },
               {
-                imgSrc: "/images/victoria.jpg",
-                title: "Best Course for GRE exams",
+                imgSrc: "/images/sandesh.jpeg",
+                title: "Complex Concepts Made Simple.",
                 description:
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices",
-                greScore: "328",
-                designation: "Standford Odio Co.",
-                name: "Victoria Wotton 4",
-                linkedin: "#",
-              },
-              {
-                imgSrc: "/images/victoria.jpg",
-                title: "Best Course for GRE exams",
-                description:
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices",
-                greScore: "328",
-                designation: "Standford Odio Co.",
-                name: "Victoria Wotton 5",
-                linkedin: "#",
+                  "Punit's ability to break down complex concepts into easily understandable parts is key. He tailors his methods to suit individual learning needs, ensuring steady progress and building confidence for test day. Thanks to his guidance, I was able to approach the GRE with clarity and determination.",
+                greScore: "320",
+                designation: "Founder, Case Ace",
+                name: "Sandesh Dholakia",
+                linkedin: "https://www.linkedin.com/in/sandesh-dholakia/",
               },
             ]}
           />
         </section>
 
         <section id="instructor" className="scroll-mt-6">
-          <article className="min-h-[450px] bg-white px-5 py-12 sm:pt-21">
-            <div className="flex flex-wrap-reverse justify-center gap-12">
+          <article className="px-fluid-container min-h-[450px] bg-white py-12 sm:pt-21">
+            <div className="flex flex-wrap-reverse justify-center gap-8">
               <div className="flex aspect-[2.05/1] max-h-72 justify-center overflow-hidden rounded-xl">
                 <img
                   className="w-full object-contain"
@@ -182,14 +176,14 @@ export default function Home() {
                 />
               </div>
               <div className="col-span-2">
-                <h3 className="mb-6 text-2xl font-[900] text-[#1B438F] sm:text-4xl">
+                <h3 className="text-xl-0 mb-6 font-[900] text-[#1B438F]">
                   Punit Mishra
                 </h3>
                 <ul className="divide-y divide-[#1B438F33] border-y border-y-[#1B438F33] text-[#1F1D39]">
                   {about.map((point, index) => (
                     <li
                       key={index}
-                      className="flex items-center gap-2.5 px-2.5 py-2 text-sm sm:text-base"
+                      className="text-sm-0 flex items-center gap-2.5 px-2.5 py-2"
                     >
                       <div className="min-h-2.5 min-w-2.5 gap-2.5 rounded-full border border-[#FF9053] bg-[#FF90534D]"></div>
                       {point}
