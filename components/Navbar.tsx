@@ -38,7 +38,7 @@ export default function Navbar() {
 
         <div className="flex items-center gap-4">
           <Link
-            href="/dashboard"
+            href="#"
             className="rounded-md border border-white px-3 py-1 text-sm font-[400] lg:text-base"
           >
             Login
