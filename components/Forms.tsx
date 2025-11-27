@@ -18,11 +18,11 @@ export function LeadGenerationForm() {
     let formData = new FormData();
     formData.append("entry.2005620554", name.value);
     formData.append("entry.1045781291", email.value);
-    formData.append("entry.1166974658", contactNumber.value);
+    formData.append("entry.1065046570", contactNumber.value);
     formData.append("entry.839337160", message.value);
 
     fetch(
-      "https://docs.google.com/forms/d/e/1FAIpQLSfy333aoi-AkxAmuvO8ZHmOywB9vLkXkxmetYrvGOafWkJyjQ/formResponse",
+      "https://docs.google.com/forms/u/0/d/e/1FAIpQLSenougX5zPABg13PXoYR1oWKhFlzTiHbpOQRX1MbpYb9RIKJA/formResponse",
       {
         method: "POST",
         body: formData,
