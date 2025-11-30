@@ -126,7 +126,7 @@ export function TestimonialCard({
           </a>
         </div>
         <p className="text-card-xs-1 font-[900]">{name}</p>
-        <p className="text-xs font-[500] text-[#21967B] sm:text-sm md:text-base xl:text-lg">
+        <p className="text-xs font-[500] text-[#108267] sm:text-sm md:text-base xl:text-lg">
           {designation}
         </p>
       </section>

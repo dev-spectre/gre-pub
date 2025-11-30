@@ -14,7 +14,7 @@
 
   --text-hero: clamp(2.125rem, 1.5rem + 3.125vw, 4.5rem);
 
-  --text-card-xs-n1: clamp(0.625rem, 0.5263rem + 0.4934vw, 1rem);
+  --text-card-xs-n1: clamp(0.75rem, 0.663rem + 0.4348vw, 1rem);
   --text-card-xs-0: clamp(0.75rem, 0.5rem + 1.25cqi, 1rem);
   --text-card-xs-1: clamp(0.75rem, 0.6513rem + 0.4934vw, 1.125rem);
 

@@ -180,7 +180,7 @@ export function TestimonialCarousel({
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
-      className="relative isolate flex min-h-[270px] mt-0 lg:mt-0 sm:mt-6 w-full flex-col items-center justify-center lg:min-h-[500px]"
+      className="relative isolate mt-0 flex min-h-[300px] w-full flex-col items-center justify-center sm:mt-6 lg:mt-0 lg:min-h-[500px]"
     >
       <div className="relative flex h-full w-full items-center justify-center">
         {testimonialsData.map((testimonial, index) => (
@@ -194,10 +194,11 @@ export function TestimonialCarousel({
         ))}
       </div>
 
-      <div className="absolute -bottom-10 z-40 flex items-center gap-2">
+      <div className="absolute -bottom-15 lg:-bottom-10 z-40 flex items-center gap-2">
         <button
+          aria-label="Previous testimonial"
           onClick={handlePrev}
-          className="pointer-events-auto z-50 rounded-full p-2 pr-0 text-white transition-all hover:scale-120"
+          className="pointer-events-auto z-50 rounded-full p-3 text-white transition-all hover:scale-120"
         >
           <svg
             width="16"
@@ -216,11 +217,12 @@ export function TestimonialCarousel({
             />
           </svg>
         </button>
-        {testimonialsData.map((_, index) => (
+        {testimonialsData.map((testimonial, index) => (
           <button
             key={index}
+            aria-label={`${testimonial.name}'s testimonial`}
             onClick={() => handleDotClick(index)}
-            className={`h-2.5 w-2.5 rounded-full transition-all duration-300 ${
+            className={`h-3 w-3 rounded-full transition-all duration-300 mx-1 ${
               (isSeeking ? targetIndex : currentIndex) === index
                 ? "w-6 bg-white"
                 : "bg-white/40 hover:bg-white/60"
@@ -229,7 +231,8 @@ export function TestimonialCarousel({
         ))}
         <button
           onClick={handleNext}
-          className="pointer-events-auto z-50 rounded-full p-2 pl-0 text-white transition-all hover:scale-120"
+          aria-label="Next testimonial"
+          className="pointer-events-auto z-50 rounded-full p-3 text-white transition-all hover:scale-120"
         >
           <svg
             width="16"
