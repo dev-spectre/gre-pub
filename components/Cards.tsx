@@ -92,7 +92,7 @@ export function TestimonialCard({
   imgSrc,
 }: TestimonialCardProps) {
   return (
-    <article className="isolate grid w-[90%] max-w-4xl grid-cols-10 gap-3 rounded-2xl bg-white px-5 py-3 transition-all ease-in hover:scale-105 sm:gap-12 sm:px-8 sm:py-6 md:px-15 md:py-7 lg:px-12 lg:py-8">
+    <article className="isolate grid w-[90%] mt-2 max-w-4xl grid-cols-10 gap-3 rounded-2xl bg-white px-5 py-3 transition-all ease-in hover:scale-105 sm:gap-12 sm:px-8 sm:py-6 md:px-15 md:py-7 lg:px-12 lg:py-8">
       <div className="relative col-span-4">
         <img
           className="absolute top-0 -left-5"

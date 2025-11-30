@@ -180,7 +180,7 @@ export function TestimonialCarousel({
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
-      className="relative isolate flex min-h-[350px] w-full flex-col items-center justify-center lg:min-h-[500px]"
+      className="relative isolate flex min-h-[270px] mt-0 lg:mt-0 sm:mt-6 w-full flex-col items-center justify-center lg:min-h-[500px]"
     >
       <div className="relative flex h-full w-full items-center justify-center">
         {testimonialsData.map((testimonial, index) => (

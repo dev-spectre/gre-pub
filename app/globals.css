@@ -3,29 +3,33 @@
 @theme {
   --font-montserrat: var(--font-montserrat), "sans-serif";
 
-  --text-sm-0: clamp(0.875rem, 0.8093rem + 0.3287vw * 0.75, 1.125rem);
+  --text-sm-0: clamp(0.875rem, 0.8093rem + 0.3287vw, 1.125rem);
 
-  --text-base-0: clamp(1rem, 0.8685rem + 0.6574vw * 0.75, 1.5rem);
-  --text-base-5: clamp(0.875rem, 0.6667rem + 1.0417vw * 0.75, 1.47rem);
+  --text-base-0: clamp(1rem, 0.8685rem + 0.6574vw, 1.5rem);
+  --text-base-5: clamp(0.875rem, 0.6667rem + 1.0417vw, 1.47rem);
 
-  --text-lg-0: clamp(1.125rem, 0.9607rem + 0.8217vw * 0.75, 1.75rem);
+  --text-lg-0: clamp(1.125rem, 0.9607rem + 0.8217vw, 1.75rem);
 
-  --text-xl-0: clamp(1.5rem, 0.9643rem + 2.6786vw * 0.75, 2.25rem);
+  --text-xl-0: clamp(1.5rem, 0.9643rem + 2.6786vw, 2.25rem);
 
-  --text-hero: clamp(1.875rem, 1.1355rem + 3.6976vw * 0.75, 4.6875rem);
+  --text-hero: clamp(2.125rem, 1.5rem + 3.125vw, 4.5rem);
 
-  --text-card-xs-n1: clamp(0.625rem, 0.5263rem + 0.4934vw * 0.75, 1rem);
-  --text-card-xs-0: clamp(0.75rem, 0.5rem + 1.25cqi * 0.75, 1rem);
-  --text-card-xs-1: clamp(0.75rem, 0.6513rem + 0.4934vw * 0.75, 1.125rem);
+  --text-card-xs-n1: clamp(0.625rem, 0.5263rem + 0.4934vw, 1rem);
+  --text-card-xs-0: clamp(0.75rem, 0.5rem + 1.25cqi, 1rem);
+  --text-card-xs-1: clamp(0.75rem, 0.6513rem + 0.4934vw, 1.125rem);
 
-  --text-card-base-0: clamp(0.875rem, 0.6875rem + 0.9375cqi * 0.75, 1.4375rem);
-  --text-card-base-1: clamp(1rem, 0.8684rem + 0.6579vw * 0.75, 1.5rem);
-  --text-card-base-2: clamp(1rem, 0.7697rem + 1.1513vw * 0.75, 1.875rem);
+  --text-card-base-0: clamp(0.875rem, 0.6875rem + 0.9375cqi, 1.4375rem);
+  --text-card-base-1: clamp(1rem, 0.8684rem + 0.6579vw, 1.5rem);
+  --text-card-base-2: clamp(1rem, 0.7697rem + 1.1513vw, 1.875rem);
 
-  --text-nav-0: clamp(0.875rem, -0.1723rem + 1.3514vw * 0.75, 1.125rem);
+  --text-nav-0: clamp(0.875rem, -0.1723rem + 1.3514vw, 1.125rem);
 
   --spacing-fluid-container: clamp(1.25rem, -0.4156rem + 8.3278vw, 9.0938rem);
-  --spacing-sm: clamp(1rem, 0.9343rem + 0.3287vw * 2, 1.25rem);
+  --spacing-sm: clamp(1rem, 0.3878rem + 2.7211vw, 3rem);
+}
+
+html {
+  font-size: 87%;
 }
 
 aside:has(#menu-btn:checked) p {
