@@ -1,4 +1,4 @@
 1) Fix tenstinomial Images - Done
-2) Flags to be revolved around Images
-3) Action for know more
+2) Flags to be revolved around Hero Image - Done
+3) Visual feedback for know more button - Done
 4) Logo as doc - Done
