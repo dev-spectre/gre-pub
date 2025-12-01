@@ -1,1 +1,4 @@
-1) Fix tenstinomial Images for Some
+1) Fix tenstinomial Images - Done
+2) Flags to be revolved around Images
+3) Action for know more
+4) Logo as doc - Done

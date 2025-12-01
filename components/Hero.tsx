@@ -1,9 +1,25 @@
 import { ButtonLink } from "@/components/Button";
 import Link from "next/link";
 
+const heroStyles = `
+  @keyframes orbitFlags {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .flag-orbit {
+    animation: orbitFlags 20s linear infinite;
+  }
+`;
+
 export default function Hero() {
   return (
     <div className="bg-gradient-to-b from-[#081329] to-[#1b428e]">
+      <style>{heroStyles}</style>
       <section className="px-fluid-container grid-cols-5 items-center justify-between text-white md:min-h-[83lvh] lg:grid">
         <header className="col-span-3 mb-12 w-full pt-16 lg:mb-0 lg:pt-0">
           <h1 className="text-hero mb-2 leading-[1.125] font-[900] text-[#FF9053] uppercase">
@@ -29,6 +45,7 @@ export default function Hero() {
         <div className="col-span-2 pb-16 text-center lg:mb-0 lg:pb-0">
           <div className="px-sm mx-auto max-w-[500px]">
             <div className="relative mb-5 flex aspect-square items-center justify-center rounded-full">
+              {/* Center profile image */}
               <div className="flex h-[70%] w-[70%] items-start justify-center overflow-hidden rounded-full">
                 <div className="bg-white/55">
                   <img
@@ -38,33 +55,45 @@ export default function Hero() {
                     alt="Prof. Punit"
                   />
                 </div>
+              </div>
+
+              {/* Orbiting flags container */}
+              <div className="absolute inset-0 flex h-full w-full items-center justify-center flag-orbit">
+                {/* Canada flag - bottom */}
                 <img
                   fetchPriority="high"
                   className="absolute bottom-[10%] left-[26%] w-[7%]"
                   src="/images/canada.webp"
                   alt=""
                 />
+                {/* US flag - left */}
                 <img
                   fetchPriority="high"
                   className="absolute top-[28%] left-[8%] w-[9%]"
                   src="/images/us.webp"
                   alt=""
                 />
+                {/* UK flag - top */}
                 <img
                   fetchPriority="high"
                   className="absolute top-0 right-[30%] w-[8%]"
                   src="/images/uk.webp"
                   alt=""
                 />
+                {/* Australia flag - right */}
                 <img
                   fetchPriority="high"
                   className="absolute top-[25%] right-[1%] w-[8%]"
                   src="/images/australia.webp"
                   alt=""
                 />
-                <div className="absolute right-[20%] bottom-[3%] h-[8%] w-[8%] rounded-full bg-white/62"></div>
-                <div className="absolute top-[10%] left-[12%] h-[8%] w-[8%] rounded-full bg-white/62"></div>
               </div>
+
+              {/* Decorative circles */}
+              <div className="absolute right-[20%] bottom-[3%] h-[8%] w-[8%] rounded-full bg-white/62"></div>
+              <div className="absolute top-[10%] left-[12%] h-[8%] w-[8%] rounded-full bg-white/62"></div>
+
+              {/* Orbiting border circles */}
               <div className="absolute inset-0 flex h-full w-full items-center justify-center blur-[0.7px] sm:blur-[1.5px]">
                 <div className="insert-0 absolute h-full w-full rounded-full border-1 border-dashed border-white/40 sm:border-3"></div>
                 <div className="h-[85%] w-[85%] rounded-full border-1 border-white/40 sm:border-4"></div>
