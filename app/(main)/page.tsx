@@ -40,7 +40,7 @@ export default function Home() {
       description:
         "Punit created a clear, personalized study plan that accounted for my work schedule. What stood out was his unique ability to identify and correct the root cause of my mistakes at a fundamental level. Highly recommended!",
       greScore: 321,
-      designation: "Growth Manager, Ten x You",
+      designation: "",
       name: "Sameer Jain",
       linkedin: "https://www.linkedin.com/in/sameer-jain-bb153716a/",
     },
@@ -60,7 +60,7 @@ export default function Home() {
       description:
         "Punit Sir is an incredibly supportive GRE coach who is flexible and tailors study plans and class timings to your needs. His material is well-structured, and he excels at creating personalized workflows to keep you on track. He's also one of the rare teachers available even on WhatsApp for doubt-solving and motivational support.",
       greScore: 336,
-      designation: "Investment Analyst, IFC",
+      designation: "",
       name: "Pranit Jain",
       linkedin: "https://www.linkedin.com/in/pranit-jain14/",
     },
@@ -70,7 +70,7 @@ export default function Home() {
       description:
         "Punit's ability to break down complex concepts into easily understandable parts is key. He tailors his methods to suit individual learning needs, ensuring steady progress and building confidence for test day. Thanks to his guidance, I was able to approach the GRE with clarity and determination.",
       greScore: 320,
-      designation: "Founder, Case Ace",
+      designation: "",
       name: "Sandesh Dholakia",
       linkedin: "https://www.linkedin.com/in/sandesh-dholakia/",
     },
