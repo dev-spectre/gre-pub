@@ -103,7 +103,7 @@ export function FooterNav() {
 
           <ul className="flex items-center gap-3 sm:gap-8">
             <li>
-              <Link href="#">
+              <Link href="https://www.instagram.com/punitmishraprep" target="_blank" rel="noopener noreferrer">
                 <img
                   className="h-6 w-6 sm:h-7 sm:w-7 md:h-auto md:w-auto"
                   src="/icons/instagram.svg"
@@ -112,7 +112,7 @@ export function FooterNav() {
               </Link>
             </li>
             <li>
-              <Link href="#">
+              <Link href="https://www.youtube.com/@punitmishraprep" target="_blank" rel="noopener noreferrer">
                 <img
                   className="h-6 w-6 sm:h-7 sm:w-7 md:h-auto md:w-auto"
                   src="/icons/youtube.svg"
@@ -121,7 +121,7 @@ export function FooterNav() {
               </Link>
             </li>
             <li>
-              <Link href="#">
+              <Link href="https://www.linkedin.com/in/punitmishra" target="_blank" rel="noopener noreferrer">
                 <img
                   className="h-6 w-6 sm:h-7 sm:w-7"
                   src="/icons/linkedin-nav.svg"
