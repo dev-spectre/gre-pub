@@ -1,10 +1,14 @@
+"use client";
+
 import { TestimonialCarousel } from "@/components/Animations";
 import { ButtonLink } from "@/components/Button";
 import { CourseFeaturesCard, InfoCard } from "@/components/Cards";
 import { LeadGenerationForm } from "@/components/Forms";
 import Hero from "@/components/Hero";
+import { useState } from "react";
 
 export default function Home() {
+  const [showFormMessage, setShowFormMessage] = useState(false);
   const privatePersonalizedTutoring = [
     "1:1 Private Classes",
     "1/2/3/4 Classes per Week, Customized to Your Convenience (1 Hour Each)",
@@ -144,11 +148,11 @@ export default function Home() {
                   ))}
                 </ul>
                 <div className="pt-8 pr-2.5 text-white">
-                  <ButtonLink href="/#request-demo-form" label="Know more" />
+                  <ButtonLink href="/#request-demo-form" label="Know more" onClick={() => setShowFormMessage(true)} />
                 </div>
               </article>
               <div id="request-demo-form" className="scroll-mt-28">
-                <LeadGenerationForm />
+                <LeadGenerationForm showMessage={showFormMessage} />
               </div>
             </div>
           </section>

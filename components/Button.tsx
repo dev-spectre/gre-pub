@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 interface ButtonProps {
   label: string;
   onClick?: () => void;
@@ -26,15 +24,19 @@ export function Button({ label, onClick, bgColor, ariaLabel }: ButtonProps) {
 interface ButtonLinkProps {
   label: string;
   href: string;
+  onClick?: () => void;
 }
 
-export function ButtonLink({ label, href }: ButtonLinkProps) {
+export function ButtonLink({ label, href, onClick }: ButtonLinkProps) {
   return (
-    <Link
+    <a
       href={href}
+      onClick={(e) => {
+        onClick?.();
+      }}
       className="inline-block w-full rounded-lg bg-gradient-to-t from-[#1b438f] to-[#34a0bd] px-3 py-2 text-center text-inherit capitalize"
     >
       {label}
-    </Link>
+    </a>
   );
 }

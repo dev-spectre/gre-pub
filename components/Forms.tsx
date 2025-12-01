@@ -1,8 +1,15 @@
 "use client";
 
 import { Button } from "./Button";
+import { useEffect, useState } from "react";
 
-export function LeadGenerationForm() {
+export function LeadGenerationForm({ showMessage }: { showMessage: boolean }) {
+  const [isVisible, setIsVisible] = useState(showMessage);
+
+  useEffect(() => {
+    setIsVisible(showMessage);
+  }, [showMessage]);
+
   const handleSubmit = () => {
     const name = document.getElementById("name") as HTMLInputElement;
     const email = document.getElementById("email") as HTMLInputElement;
@@ -47,6 +54,11 @@ export function LeadGenerationForm() {
       <h2 className="mb-6 text-center text-2xl font-[900] text-[#1B438F] capitalize sm:text-4xl">
         Request demo session
       </h2>
+      {isVisible && (
+        <p className="mb-6 text-center text-sm font-[500] text-[#FF9053]">
+          Please fill this form
+        </p>
+      )}
       <form className="text-sm-0 flex @container flex-col gap-2 text-[#1F1D39]">
         <div>
           <label className="block" htmlFor="name">
