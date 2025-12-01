@@ -18,18 +18,19 @@ export default function Navbar() {
 
   return (
     <div className="font-montserrat sticky top-0 right-0 left-0 z-60 bg-gradient-to-b from-[#081329] to-[#081329]">
-      <nav className="px-fluid-container relative flex items-center justify-between py-6 text-white">
+      <nav className="px-fluid-container relative flex items-center justify-between py-4 text-white">
         <Link href="/" className="text-2xl font-[900]">
-          PM Prep
+          <img
+            className="h-12"
+            src="/icons/logo-cropped.png"
+            alt="Punit Mishra Prep Logo"
+          />
         </Link>
 
-        <ul className="hidden gap-8 text-nav-0 font-[600] capitalize min-[1240px]:flex">
+        <ul className="text-nav-0 hidden gap-8 font-[600] capitalize min-[1240px]:flex">
           {navLinks.map(({ href, label }, index) => (
             <li key={index}>
-              <Link
-                href={href}
-                className="hover:underline"
-              >
+              <Link href={href} className="hover:underline">
                 {label}
               </Link>
             </li>
@@ -92,9 +93,14 @@ export function FooterNav() {
       <footer className="px-fluid-container bg-black/15 pt-13 text-white backdrop:blur sm:px-8 md:px-12 lg:px-36">
         {/* Header */}
         <div className="mb-5 flex items-center justify-between border-b border-b-white pb-8">
-          <Link href="/" className="text-xl font-[400] md:text-2xl">
-            PM Prep
+          <Link href="/" className="text-2xl font-[900]">
+            <img
+              className="h-12"
+              src="/icons/logo-cropped.png"
+              alt="Punit Mishra Prep Logo"
+            />
           </Link>
+
           <ul className="flex items-center gap-3 sm:gap-8">
             <li>
               <Link href="#">
