@@ -1,25 +1,9 @@
 import { ButtonLink } from "@/components/Button";
 import Link from "next/link";
 
-const heroStyles = `
-  @keyframes orbitFlags {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-
-  .flag-orbit {
-    animation: orbitFlags 20s linear infinite;
-  }
-`;
-
 export default function Hero() {
   return (
     <div className="bg-gradient-to-b from-[#081329] to-[#1b428e]">
-      <style>{heroStyles}</style>
       <section className="px-fluid-container grid-cols-5 items-center justify-between text-white md:min-h-[83lvh] lg:grid">
         <header className="col-span-3 mb-12 w-full pt-16 lg:mb-0 lg:pt-0">
           <h1 className="text-hero mb-2 leading-[1.125] font-[900] text-[#FF9053] uppercase">
@@ -57,8 +41,12 @@ export default function Hero() {
                 </div>
               </div>
 
+              {/* Decorative circles */}
+              <div className="absolute right-[20%] bottom-[3%] h-[8%] w-[8%] rounded-full bg-white/62"></div>
+              <div className="absolute top-[10%] left-[12%] h-[8%] w-[8%] rounded-full bg-white/62"></div>
+
               {/* Orbiting flags container */}
-              <div className="absolute inset-0 flex h-full w-full items-center justify-center flag-orbit">
+              <div className="flag-orbit absolute inset-0 flex h-full w-full items-center justify-center">
                 {/* Canada flag - bottom */}
                 <img
                   fetchPriority="high"
@@ -88,10 +76,6 @@ export default function Hero() {
                   alt=""
                 />
               </div>
-
-              {/* Decorative circles */}
-              <div className="absolute right-[20%] bottom-[3%] h-[8%] w-[8%] rounded-full bg-white/62"></div>
-              <div className="absolute top-[10%] left-[12%] h-[8%] w-[8%] rounded-full bg-white/62"></div>
 
               {/* Orbiting border circles */}
               <div className="absolute inset-0 flex h-full w-full items-center justify-center blur-[0.7px] sm:blur-[1.5px]">
