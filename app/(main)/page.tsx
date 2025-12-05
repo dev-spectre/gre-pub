@@ -140,7 +140,7 @@ export default function Home() {
                         className="text-sm-0 px-2.5 py-2 text-pretty"
                       >
                         <div className="flex items-center gap-2.5">
-                          <div className="min-h-2.5 min-w-2.5 gap-2.5 rounded-full border border-[#FF9053] bg-[#FF90534D]"></div>
+                          <div className="min-h-2.5 min-w-2.5 mb-0.5 gap-2.5 rounded-full border border-[#FF9053] bg-[#FF90534D]"></div>
                           <p>{data}</p>
                         </div>
                       </div>
@@ -188,7 +188,7 @@ export default function Home() {
                       key={index}
                       className="text-sm-0 flex items-center gap-2.5 px-2.5 py-2"
                     >
-                      <div className="min-h-2.5 min-w-2.5 gap-2.5 rounded-full border border-[#FF9053] bg-[#FF90534D]"></div>
+                      <div className="min-h-2.5 min-w-2.5 mb-0.5 gap-2.5 rounded-full border border-[#FF9053] bg-[#FF90534D]"></div>
                       {point}
                     </li>
                   ))}
