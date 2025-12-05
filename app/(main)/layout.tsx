@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://punitmishraprep.com/og-image.png",
+        url: "https://www.punitmishraprep.com/logo/PM_Prep_Standard_Logo.jpeg",
         width: 1200,
         height: 630,
         alt: "Punit Mishra Prep",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Punit Mishra Prep - GRE Courses & 1:1 Tutoring",
     description: "Complete GRE preparation with Universe Course and 1:1 tutoring from a 337/340 scorer.",
-    images: ["https://punitmishraprep.com/og-image.png"],
+    images: ["https://www.punitmishraprep.com/logo/PM_Prep_Standard_Logo.jpeg"],
   },
 };
 
