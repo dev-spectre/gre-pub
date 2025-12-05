@@ -55,13 +55,13 @@ export function CourseFeaturesCard() {
         You Don't.
       </p>
 
-      <ul className="my-10 space-y-3">
+      <ul className="my-10">
         {features.map((feature, i) => (
           <li
             key={i}
-            className="flex items-start gap-3 rounded border-b border-b-[#E7ECF4] px-2 pb-3 transition-colors last:border-b-0 hover:bg-[#F9FAFB]"
+            className="flex items-center gap-3 rounded border-b border-b-[#E7ECF4] px-2 py-1.5 transition-colors last:border-b-0 hover:bg-[#F9FAFB]"
           >
-            <div className="mt-0.5 min-h-3 min-w-3 flex-shrink-0 rounded-full border-2 border-[#FF9053] bg-[#FF90534D]"></div>
+            <div className="min-h-3 min-w-3 flex-shrink-0 rounded-full border-2 border-[#FF9053] bg-[#FF90534D]"></div>
             <p className="text-sm-0 font-[500] text-[#211C37] sm:text-base">
               {feature}
             </p>
