@@ -8,16 +8,16 @@ interface InfoCardProps {
 
 export function InfoCard({ title, description, imgSrc }: InfoCardProps) {
   return (
-    <section className="max-w-[263px] rounded-2xl bg-white px-4 py-6 text-center capitalize shadow-md transition-all ease-in hover:shadow-xl hover:scale-105 duration-300 hover:-translate-y-1 xl:px-5 xl:py-8">
-      <div className="mb-4 flex justify-center">
-        <img
-          className="h-20 w-20 rounded-full border-4 border-[#FF9053] object-cover p-2 sm:h-24 sm:w-24"
-          src={imgSrc}
-          alt={title}
-        />
+    <section className="max-w-[263px] rounded-2xl bg-white px-4 py-6 text-center capitalize shadow-md transition-all duration-300 ease-in hover:-translate-y-1 hover:scale-105 hover:shadow-xl xl:px-5 xl:py-8">
+      <div className="mb-4 inline-flex h-20 w-20 items-center justify-center rounded-full border-4 border-[#FF9053] p-2 sm:h-24 sm:w-24">
+        <img className="h-[90%]" src={imgSrc} alt={title} />
       </div>
-      <h3 className="text-card-base-0 mb-2 font-[600] text-[#1B438F]">{title}</h3>
-      <p className="text-card-xs-0 font-[300] text-[#626262] text-balance leading-relaxed">{description}</p>
+      <h3 className="text-card-base-0 mb-2 font-[600] text-[#1B438F]">
+        {title}
+      </h3>
+      <p className="text-card-xs-0 leading-relaxed font-[300] text-balance text-[#626262]">
+        {description}
+      </p>
     </section>
   );
 }
@@ -28,7 +28,7 @@ interface CardProps {
 
 export function Card({ children }: CardProps) {
   return (
-    <article className="inline-block rounded-3xl bg-white px-6 py-8 text-lg font-[400] shadow-xl shadow-[#1B438F1A] sm:px-10 sm:py-12 md:rounded-3xl md:px-24 md:py-16 border border-[#E7ECF4]">
+    <article className="inline-block rounded-3xl border border-[#E7ECF4] bg-white px-6 py-8 text-lg font-[400] shadow-xl shadow-[#1B438F1A] sm:px-10 sm:py-12 md:rounded-3xl md:px-24 md:py-16">
       {children}
     </article>
   );
@@ -55,14 +55,16 @@ export function CourseFeaturesCard() {
         You Don't.
       </p>
 
-      <ul className="my-10 space-y-3">
+      <ul className="my-10">
         {features.map((feature, i) => (
           <li
             key={i}
-            className="flex items-start gap-3 pb-3 border-b border-b-[#E7ECF4] last:border-b-0 transition-colors hover:bg-[#F9FAFB] px-2 rounded"
+            className="flex items-center gap-3 rounded border-b border-b-[#E7ECF4] px-2 py-1.5 transition-colors last:border-b-0 hover:bg-[#F9FAFB]"
           >
-            <div className="min-h-3 min-w-3 mt-0.5 flex-shrink-0 rounded-full border-2 border-[#FF9053] bg-[#FF90534D]"></div>
-            <p className="text-sm-0 sm:text-base text-[#211C37] font-[500]">{feature}</p>
+            <div className="min-h-3 min-w-3 flex-shrink-0 rounded-full border-2 border-[#FF9053] bg-[#FF90534D]"></div>
+            <p className="text-sm-0 font-[500] text-[#211C37]">
+              {feature}
+            </p>
           </li>
         ))}
       </ul>
@@ -94,11 +96,11 @@ export function TestimonialCard({
   imgSrc,
 }: TestimonialCardProps) {
   return (
-    <article className="isolate mt-2 flex w-[90%] max-w-4xl flex-col items-center gap-5 rounded-2xl bg-white px-6 py-6 shadow-lg shadow-[#1B438F0D] transition-all ease-in hover:shadow-2xl hover:shadow-[#1B438F15] hover:scale-105 duration-300 border border-[#E7ECF4] sm:flex-row sm:items-stretch sm:gap-8 sm:px-8 sm:py-7 md:px-14 md:py-10 lg:gap-10">
-      <div className="relative flex-shrink-0 flex justify-center sm:justify-start sm:w-40 md:w-48">
+    <article className="isolate mt-2 flex w-[90%] max-w-4xl flex-col items-center gap-5 rounded-2xl border border-[#E7ECF4] bg-white px-6 py-6 shadow-lg shadow-[#1B438F0D] transition-all duration-300 ease-in hover:scale-105 hover:shadow-2xl hover:shadow-[#1B438F15] sm:flex-row sm:items-stretch sm:gap-8 sm:px-8 sm:py-7 md:px-14 md:py-10 lg:gap-10">
+      <div className="relative flex flex-shrink-0 justify-center sm:w-40 sm:justify-start md:w-48">
         <img
           loading="lazy"
-          className="absolute -top-1 -left-1 h-6 w-6 sm:h-10 sm:w-10 sm:-top-3 sm:-left-3"
+          className="absolute -z-10 -top-1 -left-1 h-6 w-6 sm:-top-3 sm:-left-3 sm:h-10 sm:w-10"
           src="/icons/quote.png"
           alt="quote"
         />
@@ -109,19 +111,24 @@ export function TestimonialCard({
           alt={name}
         />
       </div>
-      <section className="flex flex-col justify-between flex-grow min-w-0">
+      <section className="flex min-w-0 flex-grow flex-col justify-between">
         <div>
-          <h3 className="text-card-base-1 mb-3 font-[800] line-clamp-2">{title}</h3>
-          <p className="text-card-xs-n1 mb-4 font-[400] text-[#626262] italic line-clamp-4 sm:line-clamp-none">
+          <h3 className="text-card-base-1 mb-3 line-clamp-2 font-[800]">
+            {title}
+          </h3>
+          <p className="text-card-xs-n1 mb-4 line-clamp-4 font-[400] text-[#626262] italic sm:line-clamp-none">
             {description}
           </p>
         </div>
         <div>
           <div className="mb-3 flex items-center gap-4 text-[#1B438F]">
-            <p className="text-card-base-2 font-[900]">
-              {greScore}/340
-            </p>
-            <a className="inline-block flex-shrink-0" href={linkedin} target="_blank" rel="noopener noreferrer">
+            <p className="text-card-base-2 font-[900]">{greScore}/340</p>
+            <a
+              className="inline-block flex-shrink-0"
+              href={linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <img
                 loading="lazy"
                 className="h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7"
@@ -130,8 +137,8 @@ export function TestimonialCard({
               />
             </a>
           </div>
-          <p className="text-card-xs-1 font-[900] truncate">{name}</p>
-          <p className="text-xs font-[500] text-[#108267] sm:text-sm md:text-base truncate">
+          <p className="text-card-xs-1 truncate font-[900]">{name}</p>
+          <p className="truncate text-xs font-[500] text-[#108267] sm:text-sm md:text-base">
             {designation}
           </p>
         </div>
@@ -158,7 +165,9 @@ export function CourseCard({
   className,
 }: CourseCardProps) {
   return (
-    <article className={`flex-grow rounded-xl px-4 pt-6 pb-4 shadow-md hover:shadow-lg transition-shadow duration-300 ${className}`}>
+    <article
+      className={`flex-grow rounded-xl px-4 pt-6 pb-4 shadow-md transition-shadow duration-300 hover:shadow-lg ${className}`}
+    >
       <div className="mx-2 mb-4">
         <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-sm">
           <img className="h-7 w-7" src={imgSrc} alt={title} />
