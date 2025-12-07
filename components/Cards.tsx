@@ -62,9 +62,7 @@ export function CourseFeaturesCard() {
             className="flex items-center gap-3 rounded border-b border-b-[#E7ECF4] px-2 py-1.5 transition-colors last:border-b-0 hover:bg-[#F9FAFB]"
           >
             <div className="min-h-3 min-w-3 flex-shrink-0 rounded-full border-2 border-[#FF9053] bg-[#FF90534D]"></div>
-            <p className="text-sm-0 font-[500] text-[#211C37]">
-              {feature}
-            </p>
+            <p className="text-sm-0 font-[500] text-[#211C37]">{feature}</p>
           </li>
         ))}
       </ul>
@@ -79,7 +77,7 @@ export function CourseFeaturesCard() {
 interface TestimonialCardProps {
   title: string;
   description: string;
-  greScore: number | `${number}`;
+  greScore: number | string;
   name: string;
   linkedin: string;
   designation: string;
@@ -100,7 +98,7 @@ export function TestimonialCard({
       <div className="relative flex flex-shrink-0 justify-center sm:w-40 sm:justify-start md:w-48">
         <img
           loading="lazy"
-          className="absolute -z-10 -top-1 -left-1 h-6 w-6 sm:-top-3 sm:-left-3 sm:h-10 sm:w-10"
+          className="absolute -top-1 -left-1 -z-10 h-6 w-6 sm:-top-3 sm:-left-3 sm:h-10 sm:w-10"
           src="/icons/quote.png"
           alt="quote"
         />
@@ -122,7 +120,9 @@ export function TestimonialCard({
         </div>
         <div>
           <div className="mb-3 flex items-center gap-4 text-[#1B438F]">
-            <p className="text-card-base-2 font-[900]">{greScore}/340</p>
+            <p className="text-card-base-2 font-[900]">
+              {typeof greScore === "string" ? greScore : `${greScore}/340`}
+            </p>
             <a
               className="inline-block flex-shrink-0"
               href={linkedin}

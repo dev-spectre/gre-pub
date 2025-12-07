@@ -63,7 +63,7 @@ export default function Home() {
       title: "Structure Meets Empathy.",
       description:
         "Punit Sir is an incredibly supportive GRE coach who is flexible and tailors study plans and class timings to your needs. His material is well-structured, and he excels at creating personalized workflows to keep you on track. He's also one of the rare teachers available even on WhatsApp for doubt-solving and motivational support.",
-      greScore: 336,
+      greScore: "170 Q, 166 V",
       designation: "",
       name: "Pranit Jain",
       linkedin: "https://www.linkedin.com/in/pranit-jain14/",
@@ -120,7 +120,7 @@ export default function Home() {
           id="courses"
           className="scroll-mt-5 bg-gradient-to-b from-[#e7ecf4] to-[#bec9df]"
         >
-          <div className="px-fluid-container flex items-center justify-center py-24 lg:min-h-[90vh]">
+          <div className="px-fluid-container flex items-center justify-center py-24 pb-12 lg:pb-24 lg:min-h-[90vh]">
             <CourseFeaturesCard />
           </div>
           <section

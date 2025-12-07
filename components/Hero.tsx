@@ -5,7 +5,7 @@ export default function Hero() {
   return (
     <div className="bg-gradient-to-b from-[#081329] to-[#1b428e]">
       <section className="px-fluid-container grid-cols-5 items-center justify-between text-white md:min-h-[83lvh] lg:grid">
-        <header className="col-span-3 mb-12 w-full pt-16 lg:mb-0 lg:pt-0">
+        <header className="col-span-3 mb-10 w-full pt-10 sm:pt-16 lg:mb-0 lg:pt-0">
           <h1 className="text-hero mb-2 leading-[1.125] font-[900] text-[#FF9053] uppercase">
             GRE Universe <div>course</div>
           </h1>
@@ -27,24 +27,21 @@ export default function Hero() {
           </Link>
         </header>
         <div className="col-span-2 pb-16 text-center lg:mb-0 lg:pb-0">
-          <div className="px-sm mx-auto max-w-[500px]">
+          <div className="px-sm w-[85%] sm:w-full mx-auto max-w-[500px]">
             <div className="relative mb-5 flex aspect-square items-center justify-center rounded-full">
               {/* Center profile image */}
               <div className="flex h-[70%] w-[70%] items-start justify-center overflow-hidden rounded-full">
                 <div className="bg-white/55">
                   <img
                     fetchPriority="high"
-                    className="w-full"
+                    className="w-full -scale-x-100"
                     src="/images/prof-punit.webp"
                     alt="Prof. Punit"
                   />
                 </div>
               </div>
 
-              {/* Decorative circles */}
-              <div className="absolute right-[20%] bottom-[3%] h-[8%] w-[8%] rounded-full bg-white/62"></div>
-              <div className="absolute top-[10%] left-[12%] h-[8%] w-[8%] rounded-full bg-white/62"></div>
-
+           
               {/* Orbiting flags container */}
               <div className="flag-orbit absolute inset-0 flex h-full w-full items-center justify-center">
                 {/* Canada flag - bottom */}
