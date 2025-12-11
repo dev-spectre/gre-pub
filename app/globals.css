@@ -2,6 +2,7 @@
 
 @theme {
   --font-montserrat: var(--font-montserrat), "sans-serif";
+  --font-roboto: var(--font-roboto), "sans-serif";
 
   --text-sm-0: clamp(0.875rem, 0.8093rem + 0.3287vw, 1.125rem);
 
