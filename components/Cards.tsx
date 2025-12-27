@@ -68,7 +68,7 @@ export function CourseFeaturesCard() {
       </ul>
 
       <div className="text-sm-0 text-white">
-        <ButtonLink href="/#request-demo-form" label="Enroll now" />
+        <ButtonLink href="/payment" label="Enroll now" />
       </div>
     </Card>
   );
