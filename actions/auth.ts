@@ -1,12 +1,18 @@
 "use server";
 
 import bcrypt from "bcrypt";
-import { EmailSchema, ResetPasswordSchema, SignupSchema } from "@/lib/validations/auth";
+import {
+  EmailSchema,
+  ResetPasswordSchema,
+  SignupSchema,
+} from "@/lib/validations/auth";
 import { generateOtp, generatePasswordResetToken } from "@/lib/crypto";
 import { prisma } from "@/lib/prisma";
-
-const OTP_AGE = 5 * 60 * 1000;
-const RESET_TOKEN_AGE = 60 * 60 * 1000;
+import { sendEmailOtp, sendEmailPasswordResetLink } from "@/lib/mailer";
+import {
+  OTP_AGE_IN_MILLISECONDS,
+  RESET_TOKEN_AGE_IN_MILLISECONDS,
+} from "@/lib/constant";
 
 export async function userExists(email: string) {
   try {
@@ -28,9 +34,9 @@ export async function userExists(email: string) {
   }
 }
 
-export async function sendOtp(email: string) {
+export async function sendOtp(email: string, name: string) {
   const otp = generateOtp();
-  const expiresAt = new Date(Date.now() + OTP_AGE);
+  const expiresAt = new Date(Date.now() + OTP_AGE_IN_MILLISECONDS);
 
   try {
     await prisma.otp.upsert({
@@ -39,9 +45,7 @@ export async function sendOtp(email: string) {
       create: { email, otp, expiresAt },
     });
 
-    console.log(
-      `OTP for ${email}: ${otp} (expires at ${expiresAt.toISOString()})`,
-    );
+    await sendEmailOtp(name, email, otp);
 
     return {
       success: true,
@@ -149,7 +153,7 @@ export async function signupUser(
 
 export async function sendPasswordResetLink(email: string) {
   const token = generatePasswordResetToken();
-  const expiresAt = new Date(Date.now() + RESET_TOKEN_AGE);
+  const expiresAt = new Date(Date.now() + RESET_TOKEN_AGE_IN_MILLISECONDS);
 
   const validation = EmailSchema.safeParse(email);
   if (!validation.success) {
@@ -179,9 +183,8 @@ export async function sendPasswordResetLink(email: string) {
       create: { email, token, expiresAt },
     });
 
-    console.log(
-      `http://localhost:3000/reset-password?email=${encodeURIComponent(email)}&token=${token}`,
-    );
+
+    await sendEmailPasswordResetLink(email, token, user.name ?? "");
 
     return {
       success: true,
@@ -202,7 +205,11 @@ export async function resetPassword(
   token: string,
   newPassword: string,
 ) {
-  const validation = ResetPasswordSchema.safeParse({ email, token, newPassword });
+  const validation = ResetPasswordSchema.safeParse({
+    email,
+    token,
+    newPassword,
+  });
   if (!validation.success) {
     return {
       success: false,
