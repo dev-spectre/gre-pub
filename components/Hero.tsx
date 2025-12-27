@@ -17,7 +17,7 @@ export default function Hero() {
             At ₹5,990/- for 3 months.
           </p>
           <div className="text-sm-0 w-[40%] max-w-64">
-            <ButtonLink href="/#request-demo-form" label="Enroll now" />
+            <ButtonLink href="/payment" label="Enroll now" />
           </div>
           <Link
             className="text-sm-0 pretty mt-5 inline-block italic hover:underline"

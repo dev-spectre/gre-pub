@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import { signOut, useSession } from "next-auth/react";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,6 +16,8 @@ export default function Navbar() {
     { href: "/#instructor", label: "Instructor" },
     { href: "/#request-demo-form", label: "Contact" },
   ];
+
+  const { data, status } = useSession();
 
   return (
     <div className="font-montserrat sticky top-0 right-0 left-0 z-60 bg-gradient-to-b from-[#081329] to-[#081329]">
@@ -38,12 +41,65 @@ export default function Navbar() {
         </ul>
 
         <div className="flex items-center gap-4">
-          <Link
-            href="/signin"
-            className="rounded-md border border-white px-3 py-1 text-sm font-[400] lg:text-base"
-          >
-            Login
-          </Link>
+          {status === "unauthenticated" && (
+            <Link
+              href="/signin"
+              className="rounded-md border border-white px-3 py-1 text-sm font-[400] lg:text-base"
+            >
+              Login
+            </Link>
+          )}
+          {status === "authenticated" && data?.user && (
+            <div className="flex items-center gap-3">
+              {data.user.name && (
+                <p>Hi, {data.user.name.trim().split(" ").at(0)}</p>
+              )}
+              <Link
+                href="/dashboard"
+                className="text-sm font-[400] lg:text-base"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="h-5 w-5"
+                >
+                  <rect x="3" y="3" width="7" height="7" />
+                  <rect x="14" y="3" width="7" height="7" />
+                  <rect x="14" y="14" width="7" height="7" />
+                  <rect x="3" y="14" width="7" height="7" />
+                </svg>
+              </Link>
+              <button
+                onClick={() => {
+                  signOut();
+                }}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="h-5 w-5"
+                >
+                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                  <polyline points="16 17 21 12 16 7" />
+                  <line x1="21" y1="12" x2="9" y2="12" />
+                </svg>
+              </button>
+            </div>
+          )}
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="focus:outline-none min-[1240px]:hidden"
@@ -103,7 +159,11 @@ export function FooterNav() {
 
           <ul className="flex items-center gap-3 sm:gap-8">
             <li>
-              <Link href="https://www.instagram.com/punitmishraprep/" target="_blank" rel="noopener noreferrer">
+              <Link
+                href="https://www.instagram.com/punitmishraprep/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <img
                   className="h-6 w-6 sm:h-7 sm:w-7 md:h-auto md:w-auto"
                   src="/icons/instagram.svg"
@@ -112,7 +172,11 @@ export function FooterNav() {
               </Link>
             </li>
             <li>
-              <Link href="https://www.youtube.com/@PunitMishraPrep" target="_blank" rel="noopener noreferrer">
+              <Link
+                href="https://www.youtube.com/@PunitMishraPrep"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <img
                   className="h-6 w-6 sm:h-7 sm:w-7 md:h-auto md:w-auto"
                   src="/icons/youtube.svg"
@@ -121,7 +185,11 @@ export function FooterNav() {
               </Link>
             </li>
             <li>
-              <Link href="https://www.linkedin.com/company/punitmishraprep/?viewAsMember=true" target="_blank" rel="noopener noreferrer">
+              <Link
+                href="https://www.linkedin.com/company/punitmishraprep/?viewAsMember=true"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <img
                   className="h-6 w-6 sm:h-7 sm:w-7"
                   src="/icons/linkedin-nav.svg"
