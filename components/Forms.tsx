@@ -167,7 +167,7 @@ function SignUpInit({
       return;
     }
 
-    const otpRes = await sendOtp(email);
+    const otpRes = await sendOtp(email, name);
     if (otpRes.success) {
       setStep("VERIFY_OTP");
     }
@@ -440,7 +440,7 @@ function SignUpVerify({ email, name, password }: SignUpVerifyProps) {
             type="button"
             className="font-semibold text-[#1B438F]"
             onClick={async () => {
-              await sendOtp(email);
+              await sendOtp(email, name);
               setOtpResendTimer(60);
             }}
           >
