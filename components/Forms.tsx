@@ -798,7 +798,7 @@ function ResetPasswordSetNewPassword({ token, email }: ResetPasswordProps) {
         <Button
           label="Sign Out"
           onClick={async () => {
-            await signOut();
+            await signOut({ callbackUrl: "/signin" });
           }}
         />
       </div>
