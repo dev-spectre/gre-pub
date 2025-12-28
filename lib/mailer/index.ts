@@ -58,8 +58,9 @@ export async function sendEmailPasswordResetLink(
     from: '"Punit Mishra Prep" <noreply@punitmishraprep.com>',
     to: toAddress,
     subject: "Reset your password - Punit Mishra Prep",
-    text: passwordResetTemplate.text(token, TOKEN_AGE_IN_MINUTES, name),
+    text: passwordResetTemplate.text(email, token, TOKEN_AGE_IN_MINUTES, name),
     html: passwordResetTemplate.html(
+      email,
       token,
       TOKEN_AGE_IN_MINUTES,
       LOGO_CID,

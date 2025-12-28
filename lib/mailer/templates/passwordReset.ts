@@ -1,4 +1,5 @@
 export function textTemplate(
+  email: string,
   token: string,
   tokenAgeInMinutes: number,
   name?: string,
@@ -14,7 +15,7 @@ We received a request to reset your password for your Punit Mishra Prep account.
 
 Click the link below to create a new password:
 
-${domain}/reset-password?token=${token}
+${domain}/reset-password?token=${token}&email=${email}
 
 This link is valid for the next ${tokenAgeInMinutes} minutes.
 
@@ -25,6 +26,7 @@ Team Punit Mishra Prep`;
 }
 
 export function htmlTemplate(
+  email: string,
   token: string,
   tokenAgeInMinutes: number,
   logoCid: string,
@@ -61,7 +63,7 @@ export function htmlTemplate(
 <table border=0 cellspacing=0 cellpadding=0>
 <tr>
 <td align=center>
-<a href="${domain}/reset-password?token=${token}" target=_blank style=font-size:16px;font-family:Helvetica,Arial,sans-serif;display:inline-block;font-weight:700>
+<a href="${domain}/reset-password?token=${token}&email=${email}" target=_blank style=font-size:16px;font-family:Helvetica,Arial,sans-serif;display:inline-block;font-weight:700>
 Reset Password
 </a>
 </td>
