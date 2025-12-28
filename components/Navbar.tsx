@@ -18,6 +18,10 @@ export default function Navbar() {
   ];
 
   const { data, status } = useSession();
+  let name = data?.user.name.slice(0, 10);
+  if (name && name.length >= 10) {
+    name += "...";
+  }
 
   return (
     <div className="font-montserrat sticky top-0 right-0 left-0 z-60 bg-gradient-to-b from-[#081329] to-[#081329]">
@@ -51,11 +55,7 @@ export default function Navbar() {
           )}
           {status === "authenticated" && data?.user && (
             <div className="flex items-center gap-3">
-              {data.user.name && (
-                <p className="hidden sm:block">
-                  Hi, {data.user.name.trim().split(" ").at(0)}
-                </p>
-              )}
+              {name && <p className="hidden sm:block">Hi, {name}</p>}
               <Link
                 href="/dashboard"
                 className="rounded-md border px-2 py-1 text-sm font-[400] lg:text-base"
