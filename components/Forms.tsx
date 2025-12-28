@@ -737,6 +737,7 @@ function ResetPasswordSetNewPassword({ token, email }: ResetPasswordProps) {
   const [message, setMessage] = useState("");
   const [hidePassword, setHidePassword] = useState(true);
   const [sucess, setSuccess] = useState(false);
+  const router = useRouter();
 
   const handleSubmit = async () => {
     if (!(password && confirmPassword)) {
@@ -790,8 +791,9 @@ function ResetPasswordSetNewPassword({ token, email }: ResetPasswordProps) {
             await signIn("credentials", {
               email,
               password,
-              callbackUrl: "/dashboard",
+              redirect: false,
             });
+            router.replace("/dashboard")
           }}
           label="Go to dashboard"
         />
