@@ -52,35 +52,27 @@ export default function Navbar() {
           {status === "authenticated" && data?.user && (
             <div className="flex items-center gap-3">
               {data.user.name && (
-                <p>Hi, {data.user.name.trim().split(" ").at(0)}</p>
+                <p className="hidden sm:block">
+                  Hi, {data.user.name.trim().split(" ").at(0)}
+                </p>
               )}
               <Link
                 href="/dashboard"
-                className="text-sm font-[400] lg:text-base"
+                className="rounded-md border px-2 py-1 text-sm font-[400] lg:text-base"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="h-5 w-5"
-                >
-                  <rect x="3" y="3" width="7" height="7" />
-                  <rect x="14" y="3" width="7" height="7" />
-                  <rect x="14" y="14" width="7" height="7" />
-                  <rect x="3" y="14" width="7" height="7" />
-                </svg>
+                Dashboard
               </Link>
               <button
-                onClick={() => {
-                  signOut();
+                className="group relative isolate hidden items-center min-[1240px]:flex"
+                onClick={async () => {
+                  await signOut();
                 }}
               >
+                <div className="absolute top-0 bottom-0 left-[100%] -z-10 flex w-18 items-center overflow-hidden px-1">
+                  <p className="absolute w-max -translate-x-16 opacity-0 transition-all group-hover:-translate-x-0 group-hover:opacity-100">
+                    Log Out
+                  </p>
+                </div>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -122,7 +114,7 @@ export default function Navbar() {
 
       <div
         className={`absolute top-full left-0 w-full overflow-hidden border-b border-gray-800 bg-[#09152d] text-sm text-white transition-all duration-500 ease-in-out min-[1240px]:hidden lg:text-base ${
-          isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+          isOpen ? "max-h-98 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <ul className="flex flex-col gap-6 p-6 text-center font-[600] capitalize">
@@ -137,6 +129,15 @@ export default function Navbar() {
               </Link>
             </li>
           ))}
+          <li>
+            <button
+              onClick={async () => {
+                await signOut();
+              }}
+            >
+              Log Out
+            </button>
+          </li>
         </ul>
       </div>
     </div>
