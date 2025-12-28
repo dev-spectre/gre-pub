@@ -12,7 +12,6 @@ import {
   userExists,
 } from "@/actions/auth";
 import { signIn, signOut } from "next-auth/react";
-import { set } from "zod";
 
 export function LeadGenerationForm({ showMessage }: { showMessage: boolean }) {
   const [isVisible, setIsVisible] = useState(showMessage);
