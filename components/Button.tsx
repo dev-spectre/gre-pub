@@ -3,14 +3,22 @@ interface ButtonProps {
   onClick?: () => void;
   bgColor?: string;
   ariaLabel?: string;
+  disabled?: boolean;
 }
 
-export function Button({ label, onClick, bgColor, ariaLabel }: ButtonProps) {
+export function Button({
+  label,
+  onClick,
+  bgColor,
+  ariaLabel,
+  disabled = false,
+}: ButtonProps) {
   return (
     <div className="rounded-lg bg-gradient-to-t from-[#1b438f] to-[#34a0bd] px-[2px] py-[2px]">
       <button
+        disabled={disabled}
         style={{ backgroundColor: bgColor }}
-        className={`w-full rounded-md px-3 py-2 text-inherit capitalize hover:cursor-pointer`}
+        className={`w-full rounded-md px-3 py-2 text-inherit capitalize hover:cursor-pointer disabled:cursor-progress disabled:opacity-50`}
         type="button"
         onClick={onClick}
         aria-label={ariaLabel || label}
