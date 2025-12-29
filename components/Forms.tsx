@@ -724,15 +724,19 @@ function ResetPasswordInit() {
     if (!email) {
       return;
     } else {
+      notify.loading(
+        "Sending Reset Link...",
+        "We are sending a password reset link to your email.",
+      );
       const res = await sendPasswordResetLink(email);
       if (res.success) {
         setMessage(
           "A password reset link has been sent to your email address.",
         );
       } else if (res.status === 404) {
-        setMessage("Email not found. Please check and try again.");
+        notify.error("Email not found", "Please check and try again.");
       } else {
-        setMessage("Something went wrong. Please try again later.");
+        notify.error("Something went wrong", "Please try again later.");
       }
     }
 
@@ -796,8 +800,17 @@ function ResetPasswordSetNewPassword({ token, email }: ResetPasswordProps) {
       setMessage("Passwords do not match. Please try again.");
       return;
     } else {
+      notify.loading(
+        "Updating Password...",
+        "Please wait while we set your new password.",
+      );
       const res = await resetPassword(email, token, password);
       if (res.success) {
+        notify.dismissAll();
+        notify.success(
+          "Password Updated",
+          "You can now login with your new password.",
+        );
         setSuccess(true);
       }
     }
@@ -838,6 +851,8 @@ function ResetPasswordSetNewPassword({ token, email }: ResetPasswordProps) {
       <div className="flex flex-col gap-3 text-center text-white">
         <Button
           onClick={async () => {
+            notify.dismissAll();
+            notify.loading("Authenticating...", "Verifying your credentials.");
             await signIn("credentials", {
               email,
               password,
@@ -850,6 +865,8 @@ function ResetPasswordSetNewPassword({ token, email }: ResetPasswordProps) {
         <Button
           label="Sign Out"
           onClick={async () => {
+            notify.dismissAll();
+            notify.loading("Logging Out...");
             await signOut({ callbackUrl: "/signin" });
           }}
         />
