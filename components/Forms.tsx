@@ -159,14 +159,31 @@ function SignUpInit({
 }: SignUpInitProps) {
   const handleSubmit = async () => {
     if (!(name && email && password)) {
+      notify.error("Missing Fields", "Please fill all the fields.");
       return;
-    }
-    const res = await userExists(email);
-    if (res.exists) {
-      alert("User already exists");
+    } else if (password.length < 6) {
+      notify.info(
+        "Invalid Password",
+        "Password must at least contain 6 characters.",
+      );
       return;
     }
 
+    notify.loading(
+      "Checking Availability...",
+      "Checking if account already exists.",
+    );
+    const res = await userExists(email);
+    if (res.exists) {
+      notify.error("User Already Exists", "Try to login with your account.");
+      return;
+    }
+
+    notify.dismissAll();
+    notify.loading(
+      "Verifying Email...",
+      "We are sending you an OTP in your email.",
+    );
     const otpRes = await sendOtp(email, name);
     if (otpRes.success) {
       setStep("VERIFY_OTP");
@@ -272,6 +289,7 @@ function SignUpInit({
       </div>
       <button
         onClick={async () => {
+          notify.loading("Authenticating...", "Verifying your credentials.");
           await signIn("google", { callbackUrl: "/" });
         }}
         className="font-roboto text-card-xs-0 flex w-full items-center justify-center gap-3 rounded-md border border-[#1f1d398f] py-3 font-medium text-[#1F1D39] hover:cursor-pointer hover:bg-black/5"
@@ -316,8 +334,6 @@ function SignUpVerify({ email, name, password }: SignUpVerifyProps) {
   const [otpResendTimer, setOtpResendTimer] = useState(60);
 
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
-
-  const router = useRouter();
 
   useEffect(() => {
     if (inputRefs.current[0]) {
@@ -401,9 +417,19 @@ function SignUpVerify({ email, name, password }: SignUpVerifyProps) {
       return;
     }
 
+    notify.loading("Authenticating...", "Verifying your credentials.");
     const res = await signupUser(name, email, password, finalOtp);
     if (res.success) {
       await signIn("credentials", { email, password, callbackUrl: "/" });
+    } else if (res.status === 400 && res.message === "Invalid OTP.") {
+      notify.dismissAll();
+      notify.error("Invalid OTP", "Please enter correct the correct OTP.");
+    } else if (res.status === 400 && res.message === "OTP has expired.") {
+      notify.dismissAll();
+      notify.error("Inavlid OTP", "Code expired. Request a new one.");
+    } else {
+      notify.dismissAll();
+      notify.error("Something went wrong", "Please try again later.");
     }
   };
 
@@ -440,6 +466,11 @@ function SignUpVerify({ email, name, password }: SignUpVerifyProps) {
             type="button"
             className="font-semibold text-[#1B438F]"
             onClick={async () => {
+              notify.dismissAll();
+              notify.loading(
+                "Verifying Email...",
+                "We are sending you an OTP in your email.",
+              );
               await sendOtp(email, name);
               setOtpResendTimer(60);
             }}
@@ -484,7 +515,9 @@ export function SignUpForm() {
         ) : (
           <>
             <div className="text-sm-0 mb-6 text-gray-500">
-              <p className="text-center">We just sent OTP to your email</p>
+              <p className="text-center">
+                Please enter the OTP sent via email to
+              </p>
               <div className="flex items-center justify-center gap-2">
                 <p>{email}</p>
                 <button onClick={() => setStep("INIT")}>
@@ -529,7 +562,7 @@ export function SignInForm() {
     if (password.length < 6) {
       notify.info(
         "Invalid Password",
-        "Password must at least contain 6 characters",
+        "Password must at least contain 6 characters.",
       );
       return;
     }
@@ -544,7 +577,7 @@ export function SignInForm() {
       router.replace("/");
     } else if (res?.error) {
       notify.dismissAll();
-      notify.error("Invalid Credentials", "Incorrect email or password");
+      notify.error("Invalid Credentials", "Incorrect email or password.");
     }
   };
 
