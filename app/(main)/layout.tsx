@@ -3,6 +3,7 @@ import { Montserrat } from "next/font/google";
 import "../globals.css";
 import Navbar, { FooterNav } from "@/components/Navbar";
 import { Providers } from "../providers";
+import { Toaster } from "sonner";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -55,6 +56,7 @@ export default function RootLayout({
       <body className="font-montserrat antialiased">
         <Providers>
           <Navbar />
+          <Toaster position="top-right" expand={true} />
           {children}
           <FooterNav />
         </Providers>

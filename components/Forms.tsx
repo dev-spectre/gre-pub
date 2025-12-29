@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Button, ButtonLink } from "./Button";
+import { Button } from "./Button";
 import React, { useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
@@ -12,6 +12,7 @@ import {
   userExists,
 } from "@/actions/auth";
 import { signIn, signOut } from "next-auth/react";
+import { notify } from "@/lib/toast";
 
 export function LeadGenerationForm({ showMessage }: { showMessage: boolean }) {
   const [isVisible, setIsVisible] = useState(showMessage);
@@ -522,13 +523,29 @@ export function SignInForm() {
   const [hidePassword, setHidePassword] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
 
   const handleSubmit = async () => {
-    await signIn("credentials", {
+    if (password.length < 6) {
+      notify.info(
+        "Invalid Password",
+        "Password must at least contain 6 characters",
+      );
+      return;
+    }
+
+    notify.loading("Authenticating...", "Verifying your credentials.");
+    const res = await signIn("credentials", {
       email,
       password,
-      callbackUrl: "/",
+      redirect: false,
     });
+    if (res?.ok) {
+      router.replace("/");
+    } else if (res?.error) {
+      notify.dismissAll();
+      notify.error("Invalid Credentials", "Incorrect email or password");
+    }
   };
 
   return (
@@ -625,6 +642,7 @@ export function SignInForm() {
         </div>
         <button
           onClick={async () => {
+            notify.loading("Authenticating...", "Verifying your credentials.");
             await signIn("google", { callbackUrl: "/" });
           }}
           className="font-roboto text-card-xs-0 flex w-full items-center justify-center gap-3 rounded-md border border-[#1f1d398f] py-3 font-medium text-[#1F1D39] hover:cursor-pointer hover:bg-black/5"
@@ -792,7 +810,7 @@ function ResetPasswordSetNewPassword({ token, email }: ResetPasswordProps) {
               password,
               redirect: false,
             });
-            router.replace("/dashboard")
+            router.replace("/dashboard");
           }}
           label="Go to dashboard"
         />

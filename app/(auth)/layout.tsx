@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import {
-  Montserrat,
-  Roboto
-} from "next/font/google";
+import { Montserrat, Roboto } from "next/font/google";
+import { Toaster } from "sonner";
 import "../globals.css";
 
 const montserrat = Montserrat({
@@ -18,7 +16,8 @@ const roboto = Roboto({
 
 export const metadata: Metadata = {
   title: "Punit Mishra Prep - GRE Courses & 1:1 Tutoring | 337/340 Score",
-  description: "Punit Mishra Prep: Your complete GRE prep solution. Join the GRE Universe Course or get 1:1 tutoring from Punit Mishra, a 337/340 GRE scorer.",
+  description:
+    "Punit Mishra Prep: Your complete GRE prep solution. Join the GRE Universe Course or get 1:1 tutoring from Punit Mishra, a 337/340 GRE scorer.",
   icons: {
     icon: "/icons/favicon.png",
     shortcut: "/icons/favicon.png",
@@ -26,7 +25,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Punit Mishra Prep - GRE Courses & 1:1 Tutoring",
-    description: "Complete GRE preparation with Universe Course and 1:1 tutoring from a 337/340 scorer. 1200+ students mentored.",
+    description:
+      "Complete GRE preparation with Universe Course and 1:1 tutoring from a 337/340 scorer. 1200+ students mentored.",
     url: "https://punitmishraprep.com",
     type: "website",
     images: [
@@ -41,7 +41,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Punit Mishra Prep - GRE Courses & 1:1 Tutoring",
-    description: "Complete GRE preparation with Universe Course and 1:1 tutoring from a 337/340 scorer.",
+    description:
+      "Complete GRE preparation with Universe Course and 1:1 tutoring from a 337/340 scorer.",
     images: ["https://www.punitmishraprep.com/logo/PM_Prep_Standard_Logo.jpeg"],
   },
 };
@@ -52,14 +53,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${montserrat.variable} ${roboto.variable}`}
-    >
+    <html lang="en" className={`${montserrat.variable} ${roboto.variable}`}>
       <head>
         <meta name="darkreader-lock" />
       </head>
-      <body className="antialiased font-montserrat">
+      <body className="font-montserrat antialiased">
+        <Toaster position="top-right" expand={true} />
         {children}
       </body>
     </html>
