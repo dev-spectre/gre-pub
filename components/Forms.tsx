@@ -750,6 +750,7 @@ export function SignInForm() {
 function ResetPasswordInit() {
   const [message, setMessage] = useState("");
   const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async () => {
     if (!email) {
@@ -759,7 +760,9 @@ function ResetPasswordInit() {
         "Sending Reset Link...",
         "We are sending a password reset link to your email.",
       );
+      setIsLoading(true);
       const res = await sendPasswordResetLink(email);
+      setIsLoading(false);
       if (res.success) {
         setMessage(
           "A password reset link has been sent to your email address.",
@@ -799,7 +802,11 @@ function ResetPasswordInit() {
           />
         </div>
         <div className="text-white">
-          <Button label="Send Reset Link" onClick={handleSubmit} />
+          <Button
+            label="Send Reset Link"
+            disabled={isLoading}
+            onClick={handleSubmit}
+          />
         </div>
         {message && (
           <p className="text-sm-0 mt-4 rounded-md border border-[#1B438F]/50 bg-blue-100 p-3 text-center text-[#1B438F]">
@@ -822,6 +829,7 @@ function ResetPasswordSetNewPassword({ token, email }: ResetPasswordProps) {
   const [message, setMessage] = useState("");
   const [hidePassword, setHidePassword] = useState(true);
   const [sucess, setSuccess] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const handleSubmit = async () => {
@@ -835,7 +843,9 @@ function ResetPasswordSetNewPassword({ token, email }: ResetPasswordProps) {
         "Updating Password...",
         "Please wait while we set your new password.",
       );
+      setIsLoading(true);
       const res = await resetPassword(email, token, password);
+      setIsLoading(false);
       if (res.success) {
         notify.dismissAll();
         notify.success(
@@ -881,9 +891,11 @@ function ResetPasswordSetNewPassword({ token, email }: ResetPasswordProps) {
       </p>
       <div className="flex flex-col gap-3 text-center text-white">
         <Button
+          disabled={isLoading}
           onClick={async () => {
             notify.dismissAll();
             notify.loading("Authenticating...", "Verifying your credentials.");
+            setIsLoading(true);
             await signIn("credentials", {
               email,
               password,
@@ -894,10 +906,12 @@ function ResetPasswordSetNewPassword({ token, email }: ResetPasswordProps) {
           label="Go to dashboard"
         />
         <Button
+          disabled={isLoading}
           label="Sign Out"
           onClick={async () => {
             notify.dismissAll();
             notify.loading("Logging Out...");
+            setIsLoading(true)
             await signOut({ callbackUrl: "/signin" });
           }}
         />
@@ -1030,7 +1044,7 @@ function ResetPasswordSetNewPassword({ token, email }: ResetPasswordProps) {
           </div>
         </div>
         <div className="text-sm-0 mt-6 text-white">
-          <Button label="Set New Password" onClick={handleSubmit} />
+          <Button label="Set New Password" disabled={isLoading} onClick={handleSubmit} />
         </div>
         {message && (
           <p className="text-sm-0 mt-4 rounded-md border border-[#1B438F]/50 bg-blue-100 p-3 text-center text-[#1B438F]">
