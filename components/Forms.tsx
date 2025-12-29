@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Button } from "./Button";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useActionState, useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
   resetPassword,
@@ -157,6 +157,8 @@ function SignUpInit({
   setPassword,
   setStep,
 }: SignUpInitProps) {
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleSubmit = async () => {
     if (!(name && email && password)) {
       notify.error("Missing Fields", "Please fill all the fields.");
@@ -169,6 +171,7 @@ function SignUpInit({
       return;
     }
 
+    setIsLoading(true);
     notify.loading(
       "Checking Availability...",
       "Checking if account already exists.",
@@ -176,6 +179,7 @@ function SignUpInit({
     const res = await userExists(email);
     if (res.exists) {
       notify.error("User Already Exists", "Try to login with your account.");
+      setIsLoading(false);
       return;
     }
 
@@ -185,6 +189,7 @@ function SignUpInit({
       "We are sending you an OTP in your email.",
     );
     const otpRes = await sendOtp(email, name);
+    setIsLoading(false);
     if (otpRes.success) {
       setStep("VERIFY_OTP");
     }
@@ -279,7 +284,11 @@ function SignUpInit({
           </div>
         </div>
         <div className="mt-2 text-white">
-          <Button label="Register" onClick={handleSubmit} />
+          <Button
+            label="Register"
+            disabled={isLoading}
+            onClick={handleSubmit}
+          />
         </div>
       </form>
       <div className="my-3 flex items-center justify-center gap-2">
@@ -288,7 +297,9 @@ function SignUpInit({
         <div className="mt-1 h-[1.5px] w-full rounded bg-[#1F1D3923]"></div>
       </div>
       <button
+        disabled={isLoading}
         onClick={async () => {
+          setIsLoading(true);
           notify.loading("Authenticating...", "Verifying your credentials.");
           await signIn("google", { callbackUrl: "/" });
         }}
@@ -332,6 +343,7 @@ interface SignUpVerifyProps {
 function SignUpVerify({ email, name, password }: SignUpVerifyProps) {
   const [otp, setOtp] = useState<string[]>(new Array(6).fill(""));
   const [otpResendTimer, setOtpResendTimer] = useState(60);
+  const [isLoading, setIsLoading] = useState(false);
 
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
@@ -417,6 +429,7 @@ function SignUpVerify({ email, name, password }: SignUpVerifyProps) {
       return;
     }
 
+    setIsLoading(true);
     notify.loading("Authenticating...", "Verifying your credentials.");
     const res = await signupUser(name, email, password, finalOtp);
     if (res.success) {
@@ -431,6 +444,7 @@ function SignUpVerify({ email, name, password }: SignUpVerifyProps) {
       notify.dismissAll();
       notify.error("Something went wrong", "Please try again later.");
     }
+    setIsLoading(false);
   };
 
   return (
@@ -454,7 +468,11 @@ function SignUpVerify({ email, name, password }: SignUpVerifyProps) {
       </div>
 
       <div className="text-sm-0 text-white">
-        <Button label="Verify OTP" onClick={handleSubmit} />
+        <Button
+          label="Verify OTP"
+          disabled={isLoading}
+          onClick={handleSubmit}
+        />
       </div>
 
       <p className="text-sm-0 mt-4 text-center text-gray-500">
@@ -463,6 +481,7 @@ function SignUpVerify({ email, name, password }: SignUpVerifyProps) {
           `Resend in ${otpResendTimer === 60 ? "1:00" : `${otpResendTimer}s`}`
         ) : (
           <button
+            disabled={isLoading}
             type="button"
             className="font-semibold text-[#1B438F]"
             onClick={async () => {
@@ -471,7 +490,9 @@ function SignUpVerify({ email, name, password }: SignUpVerifyProps) {
                 "Verifying Email...",
                 "We are sending you an OTP in your email.",
               );
+              setIsLoading(true);
               await sendOtp(email, name);
+              setIsLoading(false);
               setOtpResendTimer(60);
             }}
           >
