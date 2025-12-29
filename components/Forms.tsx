@@ -557,6 +557,7 @@ export function SignInForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async () => {
     if (password.length < 6) {
@@ -567,17 +568,20 @@ export function SignInForm() {
       return;
     }
 
+    setIsLoading(true);
     notify.loading("Authenticating...", "Verifying your credentials.");
     const res = await signIn("credentials", {
       email,
       password,
       redirect: false,
     });
+
     if (res?.ok) {
       router.replace("/");
     } else if (res?.error) {
       notify.dismissAll();
       notify.error("Invalid Credentials", "Incorrect email or password.");
+      setIsLoading(false);
     }
   };
 
@@ -665,7 +669,11 @@ export function SignInForm() {
             </div>
           </div>
           <div className="mt-2 text-white">
-            <Button label="Log in" onClick={handleSubmit} />
+            <Button
+              label="Log in"
+              disabled={isLoading}
+              onClick={handleSubmit}
+            />
           </div>
         </form>
         <div className="my-3 flex items-center justify-center gap-2">
@@ -674,7 +682,9 @@ export function SignInForm() {
           <div className="mt-1 h-[1.5px] w-full rounded bg-[#1F1D3923]"></div>
         </div>
         <button
+          disabled={isLoading}
           onClick={async () => {
+            setIsLoading(true);
             notify.loading("Authenticating...", "Verifying your credentials.");
             await signIn("google", { callbackUrl: "/" });
           }}
