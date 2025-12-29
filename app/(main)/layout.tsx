@@ -52,6 +52,10 @@ export default function RootLayout({
     <html lang="en" className={`${montserrat.variable}`}>
       <head>
         <meta name="darkreader-lock" />
+        <meta
+          name="google-site-verification"
+          content="0-qZVEITfNM2LDbhatBXzxROqUvqTQhFfPWMFPjN4Rk"
+        />
       </head>
       <body className="font-montserrat antialiased">
         <Providers>
