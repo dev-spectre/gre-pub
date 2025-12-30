@@ -5,7 +5,6 @@ import {
   RESET_TOKEN_AGE_IN_MILLISECONDS,
 } from "../constant";
 import otpTemplate from "@/lib/mailer/templates/otp";
-import path from "path";
 import process from "process";
 import passwordResetTemplate from "./templates/passwordReset";
 import transporter from "./transporter";
@@ -13,7 +12,6 @@ import transporter from "./transporter";
 export async function sendEmailOtp(name: string, email: string, otp: string) {
   const OTP_AGE_IN_MINUTES =
     OTP_AGE_IN_MILLISECONDS / ONE_MINUTE_IN_MILLISECONDS;
-  const LOGO_CID = "PunitMishraPrep.png";
   const toAddress = !!name ? `"${name}" <${email}>` : email;
 
   if (!transporter) {
@@ -25,14 +23,7 @@ export async function sendEmailOtp(name: string, email: string, otp: string) {
     to: toAddress,
     subject: "Verify your registration - Punit Mishra Prep",
     text: otpTemplate.text(name, otp, OTP_AGE_IN_MINUTES),
-    html: otpTemplate.html(name, otp, OTP_AGE_IN_MINUTES, LOGO_CID),
-    attachments: [
-      {
-        filename: "logo-cropped.png",
-        path: path.join(process.cwd(), "public", "icons", "logo-cropped.png"),
-        cid: LOGO_CID,
-      },
-    ],
+    html: otpTemplate.html(name, otp, OTP_AGE_IN_MINUTES),
   });
 
   if (process.env.NODE_ENV !== "production") {
@@ -45,7 +36,6 @@ export async function sendEmailPasswordResetLink(
   token: string,
   name?: string,
 ) {
-  const LOGO_CID = "PunitMishraPrep.png";
   const toAddress = !!name ? `"${name}" <${email}>` : email;
   const TOKEN_AGE_IN_MINUTES =
     RESET_TOKEN_AGE_IN_MILLISECONDS / ONE_MINUTE_IN_MILLISECONDS;
@@ -59,20 +49,7 @@ export async function sendEmailPasswordResetLink(
     to: toAddress,
     subject: "Reset your password - Punit Mishra Prep",
     text: passwordResetTemplate.text(email, token, TOKEN_AGE_IN_MINUTES, name),
-    html: passwordResetTemplate.html(
-      email,
-      token,
-      TOKEN_AGE_IN_MINUTES,
-      LOGO_CID,
-      name,
-    ),
-    attachments: [
-      {
-        filename: "logo-cropped.png",
-        path: path.join(process.cwd(), "public", "icons", "logo-cropped.png"),
-        cid: LOGO_CID,
-      },
-    ],
+    html: passwordResetTemplate.html(email, token, TOKEN_AGE_IN_MINUTES, name),
   });
 
   if (process.env.NODE_ENV !== "production") {

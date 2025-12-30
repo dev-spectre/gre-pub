@@ -29,7 +29,6 @@ export function htmlTemplate(
   email: string,
   token: string,
   tokenAgeInMinutes: number,
-  logoCid: string,
   name?: string,
 ) {
   const domain =
@@ -52,7 +51,7 @@ export function htmlTemplate(
 <table border=0 cellpadding=0 cellspacing=0 width=100% style="max-width:600px;border:1px solid #333;border-radius:5px;overflow:hidden">
 <tr>
 <td align=center style="padding:40px 20px;background-color:#081329">
-<img src=cid:${logoCid} alt="Punit Mishra Prep" width=200 style=display:block;font-family:Helvetica,Arial,sans-serif;color:#fff;font-size:20px>
+<img src="https://www.punitmishraprep.com/icons/logo-cropped.png" alt="Punit Mishra Prep" width=200 style=display:block;font-family:Helvetica,Arial,sans-serif;color:#fff;font-size:20px>
 </td>
 </tr>
 <tr>
