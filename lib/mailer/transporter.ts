@@ -5,9 +5,9 @@ const globalForNodemailer = globalThis as unknown as {
   nodemailerTransport: Transporter | undefined;
 };
 
-const testAccount = await createTestAccount();
-
 if (process.env.NODE_ENV !== "production") {
+  const testAccount = await createTestAccount();
+
   const transporter =
     globalForNodemailer.nodemailerTransport ||
     createTransport({
@@ -21,7 +21,23 @@ if (process.env.NODE_ENV !== "production") {
     });
 
   globalForNodemailer.nodemailerTransport = transporter;
+} else if (process.env.NODE_ENV === "production") {
+    const transporter =
+      globalForNodemailer.nodemailerTransport ||
+      createTransport({
+        service: "gmail",
+        auth: {
+          type: "OAuth2",
+          user: process.env.NODEMAILER_USER,
+          clientId: process.env.NODEMAILER_CLIENT_ID,
+          clientSecret: process.env.NODEMAILER_CLIENT_SECRET,
+          refreshToken: process.env.NODEMAILER_REFRESH_TOKEN,
+        },
+      });
+
+    await transporter.verify();
+    globalForNodemailer.nodemailerTransport = transporter;
 }
 
 const transporter = globalForNodemailer.nodemailerTransport;
-export default transporter; 
+export default transporter;
