@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { Button, ButtonLink } from "./Button";
-import React, { useEffect, useRef, useState } from "react";
+import { Button } from "./Button";
+import React, { useActionState, useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
   resetPassword,
@@ -12,7 +12,7 @@ import {
   userExists,
 } from "@/actions/auth";
 import { signIn, signOut } from "next-auth/react";
-import { set } from "zod";
+import { notify } from "@/lib/toast";
 
 export function LeadGenerationForm({ showMessage }: { showMessage: boolean }) {
   const [isVisible, setIsVisible] = useState(showMessage);
@@ -157,17 +157,39 @@ function SignUpInit({
   setPassword,
   setStep,
 }: SignUpInitProps) {
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleSubmit = async () => {
     if (!(name && email && password)) {
+      notify.error("Missing Fields", "Please fill all the fields.");
       return;
-    }
-    const res = await userExists(email);
-    if (res.exists) {
-      alert("User already exists");
+    } else if (password.length < 6) {
+      notify.info(
+        "Invalid Password",
+        "Password must at least contain 6 characters.",
+      );
       return;
     }
 
+    setIsLoading(true);
+    notify.loading(
+      "Checking Availability...",
+      "Checking if account already exists.",
+    );
+    const res = await userExists(email);
+    if (res.exists) {
+      notify.error("User Already Exists", "Try to login with your account.");
+      setIsLoading(false);
+      return;
+    }
+
+    notify.dismissAll();
+    notify.loading(
+      "Verifying Email...",
+      "We are sending you an OTP in your email.",
+    );
     const otpRes = await sendOtp(email, name);
+    setIsLoading(false);
     if (otpRes.success) {
       setStep("VERIFY_OTP");
     }
@@ -262,7 +284,11 @@ function SignUpInit({
           </div>
         </div>
         <div className="mt-2 text-white">
-          <Button label="Register" onClick={handleSubmit} />
+          <Button
+            label="Register"
+            disabled={isLoading}
+            onClick={handleSubmit}
+          />
         </div>
       </form>
       <div className="my-3 flex items-center justify-center gap-2">
@@ -271,7 +297,10 @@ function SignUpInit({
         <div className="mt-1 h-[1.5px] w-full rounded bg-[#1F1D3923]"></div>
       </div>
       <button
+        disabled={isLoading}
         onClick={async () => {
+          setIsLoading(true);
+          notify.loading("Authenticating...", "Verifying your credentials.");
           await signIn("google", { callbackUrl: "/" });
         }}
         className="font-roboto text-card-xs-0 flex w-full items-center justify-center gap-3 rounded-md border border-[#1f1d398f] py-3 font-medium text-[#1F1D39] hover:cursor-pointer hover:bg-black/5"
@@ -314,10 +343,9 @@ interface SignUpVerifyProps {
 function SignUpVerify({ email, name, password }: SignUpVerifyProps) {
   const [otp, setOtp] = useState<string[]>(new Array(6).fill(""));
   const [otpResendTimer, setOtpResendTimer] = useState(60);
+  const [isLoading, setIsLoading] = useState(false);
 
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
-
-  const router = useRouter();
 
   useEffect(() => {
     if (inputRefs.current[0]) {
@@ -401,10 +429,22 @@ function SignUpVerify({ email, name, password }: SignUpVerifyProps) {
       return;
     }
 
+    setIsLoading(true);
+    notify.loading("Authenticating...", "Verifying your credentials.");
     const res = await signupUser(name, email, password, finalOtp);
     if (res.success) {
       await signIn("credentials", { email, password, callbackUrl: "/" });
+    } else if (res.status === 400 && res.message === "Invalid OTP.") {
+      notify.dismissAll();
+      notify.error("Invalid OTP", "Please enter correct the correct OTP.");
+    } else if (res.status === 400 && res.message === "OTP has expired.") {
+      notify.dismissAll();
+      notify.error("Inavlid OTP", "Code expired. Request a new one.");
+    } else {
+      notify.dismissAll();
+      notify.error("Something went wrong", "Please try again later.");
     }
+    setIsLoading(false);
   };
 
   return (
@@ -428,7 +468,11 @@ function SignUpVerify({ email, name, password }: SignUpVerifyProps) {
       </div>
 
       <div className="text-sm-0 text-white">
-        <Button label="Verify OTP" onClick={handleSubmit} />
+        <Button
+          label="Verify OTP"
+          disabled={isLoading}
+          onClick={handleSubmit}
+        />
       </div>
 
       <p className="text-sm-0 mt-4 text-center text-gray-500">
@@ -437,10 +481,18 @@ function SignUpVerify({ email, name, password }: SignUpVerifyProps) {
           `Resend in ${otpResendTimer === 60 ? "1:00" : `${otpResendTimer}s`}`
         ) : (
           <button
+            disabled={isLoading}
             type="button"
             className="font-semibold text-[#1B438F]"
             onClick={async () => {
+              notify.dismissAll();
+              notify.loading(
+                "Verifying Email...",
+                "We are sending you an OTP in your email.",
+              );
+              setIsLoading(true);
               await sendOtp(email, name);
+              setIsLoading(false);
               setOtpResendTimer(60);
             }}
           >
@@ -484,7 +536,9 @@ export function SignUpForm() {
         ) : (
           <>
             <div className="text-sm-0 mb-6 text-gray-500">
-              <p className="text-center">We just sent OTP to your email</p>
+              <p className="text-center">
+                Please enter the OTP sent via email to
+              </p>
               <div className="flex items-center justify-center gap-2">
                 <p>{email}</p>
                 <button onClick={() => setStep("INIT")}>
@@ -523,13 +577,33 @@ export function SignInForm() {
   const [hidePassword, setHidePassword] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async () => {
-    await signIn("credentials", {
+    if (password.length < 6) {
+      notify.info(
+        "Invalid Password",
+        "Password must at least contain 6 characters.",
+      );
+      return;
+    }
+
+    setIsLoading(true);
+    notify.loading("Authenticating...", "Verifying your credentials.");
+    const res = await signIn("credentials", {
       email,
       password,
-      callbackUrl: "/",
+      redirect: false,
     });
+
+    if (res?.ok) {
+      router.replace("/");
+    } else if (res?.error) {
+      notify.dismissAll();
+      notify.error("Invalid Credentials", "Incorrect email or password.");
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -616,7 +690,11 @@ export function SignInForm() {
             </div>
           </div>
           <div className="mt-2 text-white">
-            <Button label="Log in" onClick={handleSubmit} />
+            <Button
+              label="Log in"
+              disabled={isLoading}
+              onClick={handleSubmit}
+            />
           </div>
         </form>
         <div className="my-3 flex items-center justify-center gap-2">
@@ -625,7 +703,10 @@ export function SignInForm() {
           <div className="mt-1 h-[1.5px] w-full rounded bg-[#1F1D3923]"></div>
         </div>
         <button
+          disabled={isLoading}
           onClick={async () => {
+            setIsLoading(true);
+            notify.loading("Authenticating...", "Verifying your credentials.");
             await signIn("google", { callbackUrl: "/" });
           }}
           className="font-roboto text-card-xs-0 flex w-full items-center justify-center gap-3 rounded-md border border-[#1f1d398f] py-3 font-medium text-[#1F1D39] hover:cursor-pointer hover:bg-black/5"
@@ -669,20 +750,27 @@ export function SignInForm() {
 function ResetPasswordInit() {
   const [message, setMessage] = useState("");
   const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async () => {
     if (!email) {
       return;
     } else {
+      notify.loading(
+        "Sending Reset Link...",
+        "We are sending a password reset link to your email.",
+      );
+      setIsLoading(true);
       const res = await sendPasswordResetLink(email);
+      setIsLoading(false);
       if (res.success) {
         setMessage(
           "A password reset link has been sent to your email address.",
         );
       } else if (res.status === 404) {
-        setMessage("Email not found. Please check and try again.");
+        notify.error("Email not found", "Please check and try again.");
       } else {
-        setMessage("Something went wrong. Please try again later.");
+        notify.error("Something went wrong", "Please try again later.");
       }
     }
 
@@ -714,7 +802,11 @@ function ResetPasswordInit() {
           />
         </div>
         <div className="text-white">
-          <Button label="Send Reset Link" onClick={handleSubmit} />
+          <Button
+            label="Send Reset Link"
+            disabled={isLoading}
+            onClick={handleSubmit}
+          />
         </div>
         {message && (
           <p className="text-sm-0 mt-4 rounded-md border border-[#1B438F]/50 bg-blue-100 p-3 text-center text-[#1B438F]">
@@ -737,6 +829,8 @@ function ResetPasswordSetNewPassword({ token, email }: ResetPasswordProps) {
   const [message, setMessage] = useState("");
   const [hidePassword, setHidePassword] = useState(true);
   const [sucess, setSuccess] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const handleSubmit = async () => {
     if (!(password && confirmPassword)) {
@@ -745,8 +839,19 @@ function ResetPasswordSetNewPassword({ token, email }: ResetPasswordProps) {
       setMessage("Passwords do not match. Please try again.");
       return;
     } else {
+      notify.loading(
+        "Updating Password...",
+        "Please wait while we set your new password.",
+      );
+      setIsLoading(true);
       const res = await resetPassword(email, token, password);
+      setIsLoading(false);
       if (res.success) {
+        notify.dismissAll();
+        notify.success(
+          "Password Updated",
+          "You can now login with your new password.",
+        );
         setSuccess(true);
       }
     }
@@ -786,18 +891,27 @@ function ResetPasswordSetNewPassword({ token, email }: ResetPasswordProps) {
       </p>
       <div className="flex flex-col gap-3 text-center text-white">
         <Button
+          disabled={isLoading}
           onClick={async () => {
+            notify.dismissAll();
+            notify.loading("Authenticating...", "Verifying your credentials.");
+            setIsLoading(true);
             await signIn("credentials", {
               email,
               password,
-              callbackUrl: "/dashboard",
+              redirect: false,
             });
+            router.replace("/dashboard");
           }}
           label="Go to dashboard"
         />
         <Button
+          disabled={isLoading}
           label="Sign Out"
           onClick={async () => {
+            notify.dismissAll();
+            notify.loading("Logging Out...");
+            setIsLoading(true)
             await signOut({ callbackUrl: "/signin" });
           }}
         />
@@ -930,7 +1044,7 @@ function ResetPasswordSetNewPassword({ token, email }: ResetPasswordProps) {
           </div>
         </div>
         <div className="text-sm-0 mt-6 text-white">
-          <Button label="Set New Password" onClick={handleSubmit} />
+          <Button label="Set New Password" disabled={isLoading} onClick={handleSubmit} />
         </div>
         {message && (
           <p className="text-sm-0 mt-4 rounded-md border border-[#1B438F]/50 bg-blue-100 p-3 text-center text-[#1B438F]">

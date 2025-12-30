@@ -3,6 +3,7 @@ import { Montserrat } from "next/font/google";
 import "../globals.css";
 import Navbar, { FooterNav } from "@/components/Navbar";
 import { Providers } from "../providers";
+import { Toaster } from "sonner";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -51,10 +52,15 @@ export default function RootLayout({
     <html lang="en" className={`${montserrat.variable}`}>
       <head>
         <meta name="darkreader-lock" />
+        <meta
+          name="google-site-verification"
+          content="0-qZVEITfNM2LDbhatBXzxROqUvqTQhFfPWMFPjN4Rk"
+        />
       </head>
       <body className="font-montserrat antialiased">
         <Providers>
           <Navbar />
+          <Toaster position="top-right" expand={true} />
           {children}
           <FooterNav />
         </Providers>
