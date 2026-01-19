@@ -4,6 +4,7 @@ interface ButtonProps {
   bgColor?: string;
   ariaLabel?: string;
   disabled?: boolean;
+  type?: "button" | "reset" | "submit"
 }
 
 export function Button({
@@ -12,6 +13,7 @@ export function Button({
   bgColor,
   ariaLabel,
   disabled = false,
+  type = "button"
 }: ButtonProps) {
   return (
     <div className="rounded-lg bg-gradient-to-t from-[#1b438f] to-[#34a0bd] px-[2px] py-[2px]">
@@ -19,7 +21,7 @@ export function Button({
         disabled={disabled}
         style={{ backgroundColor: bgColor }}
         className={`w-full rounded-md px-3 py-2 text-inherit capitalize hover:cursor-pointer disabled:pointer-events-none disabled:cursor-progress disabled:opacity-50`}
-        type="button"
+        type={type}
         onClick={onClick}
         aria-label={ariaLabel || label}
       >
