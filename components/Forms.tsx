@@ -746,7 +746,7 @@ export function SignInForm() {
   );
 }
 
-function ResetPasswordInit() {
+export function ResetPasswordInit() {
   const [message, setMessage] = useState("");
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
