@@ -5,6 +5,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model Account {
@@ -38,8 +39,6 @@ model User {
 
   accounts Account[]
   payments Payment[] // (Required for the relation to work)
-
- 
 }
 
 model Otp {
@@ -52,8 +51,10 @@ model Otp {
 model PasswordResetToken {
   id        String   @id @default(cuid())
   email     String   @unique
-  token     String   @unique // Faster lookup
+  token     String
   expiresAt DateTime
+
+  @@unique([email, token])
 }
 
 enum PaymentStatus {
@@ -63,15 +64,16 @@ enum PaymentStatus {
 }
 
 model Payment {
-  id        String   @id @default(cuid())
-  amount    Int      
-  status    PaymentStatus @default(PENDING) // Type-safe status
-  userId    String
-  user      User     @relation(fields: [userId], references: [id])
-  
-  razorpayOrderId   String   @unique 
-  razorpayPaymentId String?  
-  razorpaySignature String?
+  id     String        @id @default(cuid())
+  amount Int
+  status PaymentStatus @default(PENDING) // Type-safe status
+  userId String
+  user   User          @relation(fields: [userId], references: [id])
+
+  razorpayOrderId   String  @unique
+  razorpayPaymentId String?
+  razorpaySignature String
+  webhookPayload    Json
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

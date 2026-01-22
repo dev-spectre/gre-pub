@@ -1,4 +1,5 @@
-import { ButtonLink } from "./Button";
+import { Button } from "./Button";
+import { useRedirectToPaymentPage } from "@/hooks/payment";
 
 interface InfoCardProps {
   title: string;
@@ -45,6 +46,8 @@ export function CourseFeaturesCard() {
     "Validity of 3 Months (Extendable)",
   ];
 
+  const { redirectToPaymentPage } = useRedirectToPaymentPage();
+
   return (
     <Card>
       <h2 className="text-xl-0 mb-3 text-center leading-tight font-[900] text-[#1B438F] uppercase">
@@ -68,7 +71,12 @@ export function CourseFeaturesCard() {
       </ul>
 
       <div className="text-sm-0 text-white">
-        <ButtonLink href="/payment" label="Enroll now" />
+        <Button
+          onClick={() => {
+            redirectToPaymentPage();
+          }}
+          label="Enroll now"
+        />
       </div>
     </Card>
   );

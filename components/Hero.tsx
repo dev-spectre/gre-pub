@@ -1,7 +1,10 @@
-import { ButtonLink } from "@/components/Button";
+import { Button } from "@/components/Button";
+import { useRedirectToPaymentPage } from "@/hooks/payment";
 import Link from "next/link";
 
 export default function Hero() {
+  const { redirectToPaymentPage } = useRedirectToPaymentPage();
+
   return (
     <div className="bg-gradient-to-b from-[#081329] to-[#1b428e]">
       <section className="px-fluid-container grid-cols-5 items-center justify-between text-white md:min-h-[83lvh] lg:grid">
@@ -17,7 +20,12 @@ export default function Hero() {
             At ₹5,990/- for 3 months.
           </p>
           <div className="text-sm-0 w-[40%] max-w-64">
-            <ButtonLink href="/payment" label="Enroll now" />
+            <Button
+              onClick={() => {
+                redirectToPaymentPage();
+              }}
+              label="Enroll now"
+            />
           </div>
           <Link
             className="text-sm-0 pretty mt-5 inline-block italic hover:underline"
@@ -27,7 +35,7 @@ export default function Hero() {
           </Link>
         </header>
         <div className="col-span-2 pb-16 text-center lg:mb-0 lg:pb-0">
-          <div className="px-sm w-[85%] sm:w-full mx-auto max-w-[500px]">
+          <div className="px-sm mx-auto w-[85%] max-w-[500px] sm:w-full">
             <div className="relative mb-5 flex aspect-square items-center justify-center rounded-full">
               {/* Center profile image */}
               <div className="flex h-[70%] w-[70%] items-start justify-center overflow-hidden rounded-full">
@@ -41,7 +49,6 @@ export default function Hero() {
                 </div>
               </div>
 
-           
               {/* Orbiting flags container */}
               <div className="flag-orbit absolute inset-0 flex h-full w-full items-center justify-center">
                 {/* Canada flag - bottom */}
