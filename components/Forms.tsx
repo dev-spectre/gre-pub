@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Button } from "./Button";
-import React, { useActionState, useEffect, useRef, useState } from "react";
+import React, { FormEvent, useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
   resetPassword,
@@ -159,7 +159,8 @@ function SignUpInit({
 }: SignUpInitProps) {
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
     if (!(name && email && password)) {
       notify.error("Missing Fields", "Please fill all the fields.");
       return;
@@ -197,7 +198,10 @@ function SignUpInit({
 
   return (
     <>
-      <form className="text-sm-0 @container flex flex-col gap-2 text-[#1F1D39]">
+      <form
+        onSubmit={handleSubmit}
+        className="text-sm-0 @container flex flex-col gap-2 text-[#1F1D39]"
+      >
         <div>
           <label className="block" htmlFor="name">
             Name
@@ -232,6 +236,7 @@ function SignUpInit({
           </label>
           <div className="border/5 mt-1 mb-3 flex rounded-md border border-gray-200 bg-black/5">
             <input
+              required
               type={hidePassword ? "password" : "text"}
               className="w-full px-2 py-1"
               placeholder="Enter your password"
@@ -284,11 +289,7 @@ function SignUpInit({
           </div>
         </div>
         <div className="mt-2 text-white">
-          <Button
-            label="Register"
-            disabled={isLoading}
-            onClick={handleSubmit}
-          />
+          <Button type="submit" label="Register" disabled={isLoading} />
         </div>
       </form>
       <div className="my-3 flex items-center justify-center gap-2">
@@ -423,7 +424,8 @@ function SignUpVerify({ email, name, password }: SignUpVerifyProps) {
     inputRefs.current[nextIndex]?.focus();
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
     const finalOtp = otp.join("");
     if (finalOtp.length !== 6) {
       return;
@@ -468,11 +470,7 @@ function SignUpVerify({ email, name, password }: SignUpVerifyProps) {
       </div>
 
       <div className="text-sm-0 text-white">
-        <Button
-          label="Verify OTP"
-          disabled={isLoading}
-          onClick={handleSubmit}
-        />
+        <Button type="submit" label="Verify OTP" disabled={isLoading} />
       </div>
 
       <p className="text-sm-0 mt-4 text-center text-gray-500">
@@ -580,7 +578,8 @@ export function SignInForm() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
     if (password.length < 6) {
       notify.info(
         "Invalid Password",
@@ -612,7 +611,10 @@ export function SignInForm() {
         <h2 className="mb-6 text-center text-2xl font-[900] text-[#1B438F] capitalize sm:text-4xl">
           Log In
         </h2>
-        <form className="text-sm-0 @container flex flex-col gap-2 text-[#1F1D39]">
+        <form
+          onSubmit={handleSubmit}
+          className="text-sm-0 @container flex flex-col gap-2 text-[#1F1D39]"
+        >
           <div className="mb-2 flex-2/3 sm:mb-0">
             <label className="block" htmlFor="email">
               Email ID
@@ -633,6 +635,7 @@ export function SignInForm() {
             </label>
             <div className="border/5 mt-1 flex rounded-md border border-gray-200 bg-black/5">
               <input
+                required
                 type={hidePassword ? "password" : "text"}
                 className="w-full px-2 py-1"
                 placeholder="Enter your password"
@@ -690,11 +693,7 @@ export function SignInForm() {
             </div>
           </div>
           <div className="mt-2 text-white">
-            <Button
-              label="Log in"
-              disabled={isLoading}
-              onClick={handleSubmit}
-            />
+            <Button label="Log in" disabled={isLoading} type="submit" />
           </div>
         </form>
         <div className="my-3 flex items-center justify-center gap-2">
@@ -747,12 +746,13 @@ export function SignInForm() {
   );
 }
 
-function ResetPasswordInit() {
+export function ResetPasswordInit() {
   const [message, setMessage] = useState("");
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
     if (!email) {
       return;
     } else {
@@ -784,7 +784,10 @@ function ResetPasswordInit() {
       <p className="text-sm-0 mb-4 text-center text-gray-500">
         Please enter your email. We'll send a password reset link to your email.
       </p>
-      <form className="text-sm-0 @container flex flex-col gap-2 text-[#1F1D39]">
+      <form
+        onSubmit={handleSubmit}
+        className="text-sm-0 @container flex flex-col gap-2 text-[#1F1D39]"
+      >
         <div className="mb-4 flex-2/3">
           <label className="block" htmlFor="email">
             Email ID
@@ -802,11 +805,7 @@ function ResetPasswordInit() {
           />
         </div>
         <div className="text-white">
-          <Button
-            label="Send Reset Link"
-            disabled={isLoading}
-            onClick={handleSubmit}
-          />
+          <Button label="Send Reset Link" disabled={isLoading} type="submit" />
         </div>
         {message && (
           <p className="text-sm-0 mt-4 rounded-md border border-[#1B438F]/50 bg-blue-100 p-3 text-center text-[#1B438F]">
@@ -832,7 +831,8 @@ function ResetPasswordSetNewPassword({ token, email }: ResetPasswordProps) {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
     if (!(password && confirmPassword)) {
       return;
     } else if (password !== confirmPassword) {
@@ -911,7 +911,7 @@ function ResetPasswordSetNewPassword({ token, email }: ResetPasswordProps) {
           onClick={async () => {
             notify.dismissAll();
             notify.loading("Logging Out...");
-            setIsLoading(true)
+            setIsLoading(true);
             await signOut({ callbackUrl: "/signin" });
           }}
         />
@@ -922,13 +922,14 @@ function ResetPasswordSetNewPassword({ token, email }: ResetPasswordProps) {
       <p className="text-sm-0 mb-3 text-center text-gray-500">
         Enter a new password to reset the password on your account.
       </p>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="mb-5">
           <label className="block" htmlFor="password">
             Password
           </label>
           <div className="border/5 mt-1 mb-3 flex rounded-md border border-gray-200 bg-black/5">
             <input
+              required
               type={hidePassword ? "password" : "text"}
               className="w-full px-2 py-1"
               placeholder="Enter your password"
@@ -989,6 +990,7 @@ function ResetPasswordSetNewPassword({ token, email }: ResetPasswordProps) {
           </label>
           <div className="border/5 mt-1 mb-3 flex rounded-md border border-gray-200 bg-black/5">
             <input
+              required
               type={hidePassword ? "password" : "text"}
               className="w-full px-2 py-1"
               placeholder="Confirm your password"
@@ -1044,7 +1046,7 @@ function ResetPasswordSetNewPassword({ token, email }: ResetPasswordProps) {
           </div>
         </div>
         <div className="text-sm-0 mt-6 text-white">
-          <Button label="Set New Password" disabled={isLoading} onClick={handleSubmit} />
+          <Button label="Set New Password" disabled={isLoading} type="submit" />
         </div>
         {message && (
           <p className="text-sm-0 mt-4 rounded-md border border-[#1B438F]/50 bg-blue-100 p-3 text-center text-[#1B438F]">
