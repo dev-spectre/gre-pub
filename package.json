@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "prisma generate && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "postinstall": "prisma generate"
@@ -24,6 +24,8 @@
     "react-hot-toast": "^2.6.0",
     "recharts": "^3.3.0",
     "sonner": "^2.0.7",
+    "dotenv": "^17.2.3",
+    "prisma": "^6.19.2",
     "zod": "^4.2.1"
   },
   "devDependencies": {
@@ -35,9 +37,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "baseline-browser-mapping": "^2.8.32",
-    "dotenv": "^17.2.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
-    "prisma": "^6.19.2",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
