@@ -1,7 +1,7 @@
 import { validateWebhookSignature } from "razorpay/dist/utils/razorpay-utils";
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { PaymentStatus } from "@/generated/prisma/enums";
+import { PaymentStatus } from "@prisma/client";
 
 export async function POST(req: NextRequest) {
   const razorpaySignature = req.headers.get("X-Razorpay-Signature");
