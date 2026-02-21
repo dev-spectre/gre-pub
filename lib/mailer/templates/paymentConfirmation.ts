@@ -19,7 +19,6 @@ You now have access to:
  - 1000+ practice questions
  - Adaptive full-length mock tests
  - Customized study plans
- - 1:1 personalized private tutoring (if applicable)
 
 You can log in to your dashboard to start your preparation immediately.
 
@@ -81,7 +80,6 @@ You now have access to:
 <li>1000+ practice questions</li>
 <li>Adaptive full-length mock tests</li>
 <li>Customized study plans</li>
-<li>1:1 personalized private tutoring (if applicable)</li>
 </ul>
 <p style="margin:0 0 20px 0">
 You can log in to your dashboard to start your preparation immediately.
