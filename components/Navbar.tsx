@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,6 +23,8 @@ export default function Navbar() {
   if (name && name.length >= 10) {
     name += "...";
   }
+
+  const router = useRouter();
 
   return (
     <div className="font-montserrat sticky top-0 right-0 left-0 z-60 bg-gradient-to-b from-[#081329] to-[#081329]">
@@ -56,12 +59,14 @@ export default function Navbar() {
           {status === "authenticated" && data?.user && (
             <div className="flex items-center gap-3">
               {name && <p className="hidden sm:block">Hi, {name}</p>}
-              <Link
+              <Button onClick={() => {
+
+              }}
                 href="/dashboard"
                 className="rounded-md border px-2 py-1 text-sm font-[400] lg:text-base"
               >
                 Dashboard
-              </Link>
+              </Button>
               <button
                 className="group relative isolate hidden items-center min-[1240px]:flex"
                 onClick={async () => {
