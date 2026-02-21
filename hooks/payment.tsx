@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 export function useRedirectToPaymentPage() {
-  const BASE_URL = "https://pages.razorpay.com/pl_S69blD7VGmwnK1/view";
+  const BASE_URL = "https://rzp.io/rzp/rCNGqsKz";
   const router = useRouter();
   const { data, status } = useSession();
 
