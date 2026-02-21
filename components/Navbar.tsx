@@ -59,14 +59,12 @@ export default function Navbar() {
           {status === "authenticated" && data?.user && (
             <div className="flex items-center gap-3">
               {name && <p className="hidden sm:block">Hi, {name}</p>}
-              <Button onClick={() => {
-
-              }}
+              <Link
                 href="/dashboard"
                 className="rounded-md border px-2 py-1 text-sm font-[400] lg:text-base"
               >
                 Dashboard
-              </Button>
+              </Link>
               <button
                 className="group relative isolate hidden items-center min-[1240px]:flex"
                 onClick={async () => {
