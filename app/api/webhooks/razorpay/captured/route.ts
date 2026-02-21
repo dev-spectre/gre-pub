@@ -40,22 +40,14 @@ export async function POST(req: NextRequest) {
     const amount = body.payload.payment.entity.amount;
     const razorpayPaymentId = body.payload.payment.entity.id;
     const razorpayOrderId = body.payload.payment.entity.order_id;
-    const paymentMethod = body.payload.payment.entity.method;
-    const paymentDate = new Date(body.payload.payment.entity.created_at * 1000)
-      .toLocaleString("en-IN", {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: true,
-      })
-      .toLocaleUpperCase();
-
-    const transactionId =
-      paymentMethod == "upi"
-        ? body.payload.payment.entity.acquirer_data.upi_transaction_id
-        : razorpayPaymentId;
+    const paymentDate = new Date(body.payload.payment.entity.created_at * 1000).toLocaleString("en-IN", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    }).toLocaleUpperCase();
 
     const user = await prisma.user.findUnique({
       where: { email: email },
@@ -75,13 +67,7 @@ export async function POST(req: NextRequest) {
       });
 
       const amountInRupees = (amount / 100).toFixed(2);
-      await sendPaymentConfirmation(
-        email,
-        transactionId,
-        amountInRupees,
-        paymentDate,
-        user.name ?? "",
-      );
+      await sendPaymentConfirmation(email, razorpayPaymentId, amountInRupees, paymentDate, user.name ?? "");
 
       return NextResponse.json(
         {
