@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -60,7 +60,7 @@ export default function Navbar() {
             <div className="flex items-center gap-3">
               {name && <p className="hidden sm:block">Hi, {name}</p>}
               <Link
-                href="/dashboard"
+                href="/dashboard/user"
                 className="rounded-md border px-2 py-1 text-sm font-[400] lg:text-base"
               >
                 Dashboard
@@ -269,67 +269,144 @@ export function FooterNav() {
 }
 
 export function Sidebar() {
+  const pathname = usePathname();
+
+  const isAdmin = pathname.startsWith("/dashboard/admin");
+
+  const userNavItems = [
+    {
+      href: "/dashboard/user",
+      icon: "/icons/view-grid.png",
+      label: "Dashboard",
+    },
+    {
+      href: "/dashboard/user/recordings",
+      icon: "/icons/class-lesson.png",
+      label: "Recordings",
+    },
+    {
+      href: "/dashboard/user/learn/quant",
+      icon: "/icons/university.png",
+      label: "Learn Quant",
+    },
+    {
+      href: "/dashboard/user/learn/verbal",
+      icon: "/icons/university.png",
+      label: "Learn Verbal",
+    },
+    {
+      href: "/dashboard/user/notes",
+      icon: "/icons/documents.png",
+      label: "Notes",
+    },
+    {
+      href: "/dashboard/user/mock-test",
+      icon: "/icons/exam-multiple-choice.png",
+      label: "Mock Test",
+    },
+  ];
+
+  const adminNavItems = [
+    {
+      href: "/dashboard/admin",
+      icon: "/icons/view-grid.png",
+      label: "Dashboard",
+    },
+    {
+      href: "/dashboard/admin/analytics",
+      icon: "/icons/class-lesson.png",
+      label: "Analytics",
+    },
+    {
+      href: "/dashboard/admin/resources",
+      icon: "/icons/class-lesson.png",
+      label: "Resources",
+    },
+    {
+      href: "/dashboard/admin/user-access",
+      icon: "/icons/class-lesson.png",
+      label: "User Access",
+    },
+    {
+      href: "/dashboard/admin/create-mock",
+      icon: "/icons/university.png",
+      label: "Create Mock",
+    },
+  ];
+
+  const navItems = isAdmin ? adminNavItems : userNavItems;
+
   return (
-    <>
-      <aside className="group row-span-2 inline-block min-h-[100lvh] min-w-24 border-r border-r-[#E5E5E5] bg-white px-6.5 pt-8.5">
-        <label htmlFor="menu-btn" className="mb-8 ml-2 inline-block">
-          <img src="/icons/menu.png" alt="" />
-        </label>
-        <input type="checkbox" id="menu-btn" className="peer hidden" />
-        <nav className="peer-[:not(:checked)]:min-w-44">
-          <ul className="space-y-3">
-            <li>
-              <Link
-                href="#"
-                className="flex items-center gap-2 rounded bg-[#1B438F1A] px-2 py-2"
-              >
-                <img src="/icons/view-grid.png" alt="" />
-                <p>Dashboard</p>
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="#"
-                className="flex items-center gap-2 rounded px-2 py-2 hover:bg-[#1B438F1A]"
-              >
-                <img src="/icons/class-lesson.png" alt="" />
-                <p>Courses</p>
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="#"
-                className="flex items-center gap-2 rounded px-2 py-2 hover:bg-[#1B438F1A]"
-              >
-                <img src="/icons/university.png" alt="" />
-                <p>Universites</p>
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="#"
-                className="flex items-center gap-2 rounded px-2 py-2 hover:bg-[#1B438F1A]"
-              >
-                <img src="/icons/documents.png" alt="" />
-                <p>Documents</p>
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="#"
-                className="flex items-center gap-2 rounded px-2 py-2 hover:bg-[#1B438F1A]"
-              >
-                <img
-                  className="-ml-1 h-7"
-                  src="/icons/exam-multiple-choice.png"
-                  alt=""
-                />
-                <p>Mock test</p>
-              </Link>
-            </li>
-          </ul>
-        </nav>
-      </aside>
-    </>
+    <aside className="row-span-2 inline-block min-h-screen min-w-24 border-r border-r-[#E5E5E5] bg-white px-6.5 pt-8.5">
+      <label htmlFor="menu-btn" className="mb-8 ml-2 inline-block">
+        <img src="/icons/menu.png" alt="Menu" />
+      </label>
+      <input type="checkbox" id="menu-btn" className="peer hidden" />
+      <nav className="peer-[:not(:checked)]:min-w-44">
+        <ul className="space-y-3">
+          {navItems.map(({ href, icon, label }) => {
+            const isActive = pathname === href;
+            return (
+              <li key={href}>
+                <Link
+                  href={href}
+                  className={`flex items-center gap-2 rounded px-2 py-2 transition-colors ${
+                    isActive
+                      ? "bg-[#1B438F1A] text-[#1B438F]"
+                      : "hover:bg-[#1B438F1A]"
+                  }`}
+                >
+                  <img
+                    src={icon}
+                    alt={label}
+                    className={
+                      label === "Mock Test" || label === "Analytics"
+                        ? "-ml-1 h-7"
+                        : ""
+                    }
+                  />
+                  <p>{label}</p>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+    </aside>
   );
 }
+
+export function DashboardNavbar() {
+  const pathname = usePathname();
+  const isAdmin = pathname.startsWith("/dashboard/admin");
+
+  return (
+    <div className="mt-4.5 mr-4 flex items-center justify-between rounded-md border border-[#E5E5E5] bg-white px-5 py-5">
+      <Link href="/">
+        <h1 className="font-montserrat text-xl font-[400] text-[#1B438F]">
+          GRE NextEra {isAdmin && "(Admin)"}
+        </h1>
+      </Link>
+
+      <div className="flex items-center gap-3">
+        {!isAdmin && (
+          <div className="flex gap-1.5 rounded-lg bg-gradient-to-t from-[#1b438f] to-[#34a0bd] px-[2px] py-[2px] font-[500] text-white capitalize">
+            <button className="flex gap-1.5 px-3 py-1">
+              <img src="/icons/sparkles.svg" alt="" />
+              <span className="underline">Upgrade now</span>
+            </button>
+          </div>
+        )}
+        <button>
+          <img src="/icons/notification-icon.svg" alt="notification" />
+        </button>
+        <img
+          className="h-9 w-9 rounded-full"
+          src="/images/profile.png"
+          alt="profile picture"
+        />
+      </div>
+    </div>
+  );
+}
+

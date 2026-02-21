@@ -164,6 +164,12 @@ interface CourseCardProps {
   className: string;
 }
 
+interface SimpleCourseCardProps {
+  title: string;
+  imgSrc: string;
+  className: string;
+}
+
 export function CourseCard({
   title,
   articles,
@@ -199,5 +205,30 @@ export function CourseCard({
         </div>
       </div>
     </article>
+  );
+}
+
+export function SimpleCourseCard({ title, imgSrc, className }: SimpleCourseCardProps) {
+  const getActionText = () => {
+    if (title === "Mock Tests") return "Take Mock";
+    return `Learn ${title}`;
+  };
+
+  return (
+    <div
+      className={`cursor-pointer rounded-lg p-4 transition-all duration-300 hover:scale-105 hover:shadow-lg ${className} min-w-[200px] flex-1`}
+    >
+      <div className="mb-3 flex items-center gap-3">
+        <img
+          src={imgSrc || "/placeholder.svg"}
+          alt={title}
+          className="h-12 w-12"
+        />
+        <div>
+          <h3 className="font-semibold text-[#211C37]">{title}</h3>
+          <p className="text-xs text-[#85878D]">{getActionText()}</p>
+        </div>
+      </div>
+    </div>
   );
 }

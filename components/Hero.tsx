@@ -1,9 +1,23 @@
+"use client";
+
 import { Button } from "@/components/Button";
 import { useRedirectToPaymentPage } from "@/hooks/payment";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 export default function Hero() {
   const { redirectToPaymentPage } = useRedirectToPaymentPage();
+  const { data, status } = useSession();
+  const router = useRouter();
+
+  const handleEnroll = () => {
+    if (status === "authenticated" && data?.user?.hasPaid) {
+      router.push("/dashboard/user");
+      return;
+    }
+    redirectToPaymentPage();
+  };
 
   return (
     <div className="bg-gradient-to-b from-[#081329] to-[#1b428e]">
@@ -14,17 +28,19 @@ export default function Hero() {
           </h1>
           <p className="text-lg-0 mb-3.5 max-w-[95%] leading-tight font-[600] text-balance">
             Your Entire GRE Universe In One Course — Everything You Need,
-            Nothing You Don't.
+            Nothing You Don&apos;t.
           </p>
           <p className="text-fluid-base-0 text-base-0 mb-2.5 block font-[400]">
             At ₹5,990/- for 3 months.
           </p>
           <div className="text-sm-0 w-[40%] max-w-64">
             <Button
-              onClick={() => {
-                redirectToPaymentPage();
-              }}
-              label="Enroll now"
+              onClick={handleEnroll}
+              label={
+                status === "authenticated" && data?.user?.hasPaid
+                  ? "Go to Dashboard"
+                  : "Enroll now"
+              }
             />
           </div>
           <Link

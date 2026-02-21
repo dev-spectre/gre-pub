@@ -60,6 +60,17 @@ const handler = NextAuth({
         token.name = user.name;
       }
 
+      // Check if user has a successful payment
+      if (token.email) {
+        const payment = await prisma.payment.findFirst({
+          where: {
+            user: { email: token.email as string },
+            status: "SUCCESS",
+          },
+        });
+        token.hasPaid = !!payment;
+      }
+
       return token;
     },
 
@@ -67,6 +78,7 @@ const handler = NextAuth({
       if (token) {
         session.user.email = token.email as string;
         session.user.name = token.name as string;
+        session.user.hasPaid = Boolean(token.hasPaid);
       }
 
       return session;
