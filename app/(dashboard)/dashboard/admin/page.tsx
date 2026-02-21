@@ -1,9 +1,7 @@
-"use client";
-
-import { CourseCard } from "@/components/Cards";
+import { SimpleCourseCard } from "@/components/Cards";
 import { HourSpent, Performance } from "@/components/Charts";
 
-export default function Dashboard() {
+export default function AdminDashboard() {
   const leaderboard = [
     {
       name: "Charlie Rawal",
@@ -27,9 +25,9 @@ export default function Dashboard() {
     <main className="rounded border border-[#E5E5E5] bg-white px-5 py-8.5">
       <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h3 className="text-xl text-[#211C37]">Hello Maietry 👋</h3>
+          <h3 className="text-xl text-[#211C37]">Admin Dashboard 👋</h3>
           <p className="text-xs text-[#85878D]">
-            Let's learn something new today!
+            Manage your GRE platform here.
           </p>
         </div>
         <div className="flex">
@@ -47,28 +45,20 @@ export default function Dashboard() {
           </button>
         </div>
       </div>
+
       <section className="flex flex-wrap gap-4">
-        <CourseCard
+        <SimpleCourseCard
           title="Qualitative"
-          assignments={8}
-          articles={24}
-          members={99}
           imgSrc="/icons/qualitative.png"
           className="bg-[#E1E2F6]"
         />
-        <CourseCard
+        <SimpleCourseCard
           title="Quantitative"
-          assignments={8}
-          articles={24}
-          members={99}
           imgSrc="/icons/quantitative.png"
           className="bg-[#F8EFE2]"
         />
-        <CourseCard
+        <SimpleCourseCard
           title="Verbal"
-          assignments={8}
-          articles={24}
-          members={99}
           imgSrc="/icons/verbal.png"
           className="bg-[#EFF7E2]"
         />
@@ -80,7 +70,7 @@ export default function Dashboard() {
           <HourSpent />
         </article>
         <article>
-          <h2 className="mt-4.5 mb-3.5">Performance</h2>
+          <h2 className="mt-4.5 mb-3.5">Point Progress</h2>
           <Performance />
         </article>
       </section>
