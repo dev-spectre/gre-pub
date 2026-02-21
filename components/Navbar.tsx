@@ -60,7 +60,7 @@ export default function Navbar() {
             <div className="flex items-center gap-3">
               {name && <p className="hidden sm:block">Hi, {name}</p>}
               <Link
-                href="/dashboard/user"
+                href="/dashboard"
                 className="rounded-md border px-2 py-1 text-sm font-[400] lg:text-base"
               >
                 Dashboard

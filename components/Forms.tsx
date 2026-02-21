@@ -894,16 +894,9 @@ function ResetPasswordSetNewPassword({ token, email }: ResetPasswordProps) {
           disabled={isLoading}
           onClick={async () => {
             notify.dismissAll();
-            notify.loading("Authenticating...", "Verifying your credentials.");
-            setIsLoading(true);
-            await signIn("credentials", {
-              email,
-              password,
-              redirect: false,
-            });
-            router.replace("/dashboard");
+            router.replace("/");
           }}
-          label="Go to dashboard"
+          label="Go to Home Page"
         />
         <Button
           disabled={isLoading}

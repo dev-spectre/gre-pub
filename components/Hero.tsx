@@ -13,7 +13,7 @@ export default function Hero() {
 
   const handleEnroll = () => {
     if (status === "authenticated" && data?.user?.hasPaid) {
-      router.push("/dashboard/user");
+      router.push("/dashboard");
       return;
     }
     redirectToPaymentPage();
