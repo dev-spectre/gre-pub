@@ -41,6 +41,7 @@ export async function POST(req: NextRequest) {
     const razorpayPaymentId = body.payload.payment.entity.id;
     const razorpayOrderId = body.payload.payment.entity.order_id;
     const paymentDate = new Date(body.payload.payment.entity.created_at * 1000).toLocaleString("en-IN", {
+      timeZone: "Asia/Kolkata",
       day: "2-digit",
       month: "short",
       year: "numeric",
