@@ -69,7 +69,7 @@ model Payment {
   userId String
   user   User          @relation(fields: [userId], references: [id])
 
-  razorpayOrderId   String  @unique
+  razorpayOrderId   String
   razorpayPaymentId String?
   razorpaySignature String
   webhookPayload    Json
