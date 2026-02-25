@@ -275,32 +275,22 @@ export function Sidebar() {
 
   const userNavItems = [
     {
-      href: "/dashboard/user",
+      href: "/dashboard",
       icon: "/icons/view-grid.png",
       label: "Dashboard",
     },
     {
-      href: "/dashboard/user/recordings",
-      icon: "/icons/class-lesson.png",
-      label: "Recordings",
-    },
-    {
-      href: "/dashboard/user/learn/quant",
+      href: "/dashboard/learn/quant",
       icon: "/icons/university.png",
       label: "Learn Quant",
     },
     {
-      href: "/dashboard/user/learn/verbal",
+      href: "/dashboard/learn/verbal",
       icon: "/icons/university.png",
       label: "Learn Verbal",
     },
     {
-      href: "/dashboard/user/notes",
-      icon: "/icons/documents.png",
-      label: "Notes",
-    },
-    {
-      href: "/dashboard/user/mock-test",
+      href: "/dashboard/mock-test",
       icon: "/icons/exam-multiple-choice.png",
       label: "Mock Test",
     },
