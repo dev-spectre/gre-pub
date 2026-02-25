@@ -46,8 +46,8 @@ export default function DashboardLayout({
         className={`${montserrat.className} grid grid-cols-[min-content_1fr] grid-rows-[min-content_1fr] gap-4 bg-[#EEF2F6]`}
       >
         <Sidebar />
-        <DashboardNavbar />
-        <div className="mr-4">{children}</div>
+        {/* <DashboardNavbar /> */}
+        <div className="mr-4 mt-4">{children}</div>
       </body>
     </html>
   );

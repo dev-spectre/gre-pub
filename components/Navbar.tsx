@@ -377,26 +377,6 @@ export function DashboardNavbar() {
           GRE NextEra {isAdmin && "(Admin)"}
         </h1>
       </Link>
-
-      <div className="flex items-center gap-3">
-        {!isAdmin && (
-          <div className="flex gap-1.5 rounded-lg bg-gradient-to-t from-[#1b438f] to-[#34a0bd] px-[2px] py-[2px] font-[500] text-white capitalize">
-            <button className="flex gap-1.5 px-3 py-1">
-              <img src="/icons/sparkles.svg" alt="" />
-              <span className="underline">Upgrade now</span>
-            </button>
-          </div>
-        )}
-        <button>
-          <img src="/icons/notification-icon.svg" alt="notification" />
-        </button>
-        <img
-          className="h-9 w-9 rounded-full"
-          src="/images/profile.png"
-          alt="profile picture"
-        />
-      </div>
     </div>
   );
 }
-
