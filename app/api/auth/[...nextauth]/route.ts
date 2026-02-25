@@ -5,6 +5,7 @@ import bcrypt from "bcrypt";
 import { SigninSchema } from "@/lib/validations/auth";
 import { prisma } from "@/lib/prisma";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { PaymentStatus } from "@prisma/client";
 
 const handler = NextAuth({
   debug: process.env.NODE_ENV === "development",
@@ -65,7 +66,7 @@ const handler = NextAuth({
         const payment = await prisma.payment.findFirst({
           where: {
             user: { email: token.email as string },
-            status: "SUCCESS",
+            status: PaymentStatus.SUCCESS,
           },
         });
         token.hasPaid = !!payment;
