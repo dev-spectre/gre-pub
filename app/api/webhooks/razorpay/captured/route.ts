@@ -1,7 +1,6 @@
 import { validateWebhookSignature } from "razorpay/dist/utils/razorpay-utils";
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { PaymentStatus } from "@prisma/client";
 import { sendPaymentConfirmation } from "@/lib/mailer";
 
 export async function POST(req: NextRequest) {
@@ -63,7 +62,7 @@ export async function POST(req: NextRequest) {
           razorpayOrderId: razorpayOrderId,
           razorpaySignature: razorpaySignature,
           webhookPayload: body,
-          status: PaymentStatus.SUCCESS,
+          status: "SUCCESS",
         },
       });
 
