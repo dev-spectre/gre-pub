@@ -32,7 +32,7 @@ export default function Home() {
       imgSrc: "/images/siddharth.webp",
       title: "The Blueprint for My GRE Success.",
       description:
-        "Initially, I was very confused, but then I discovered Punit Mishra Prep, and it worked like magic. Without using any flattery, I can say that the strategies for both the quant and verbal sections led to a tremendous improvement. I would personally recommend Punit Mishra Prep.",
+        "Initially, I was very confused, but then I discovered GRE Prep, and it worked like magic. Without using any flattery, I can say that the strategies for both the quant and verbal sections led to a tremendous improvement. I would personally recommend GRE Prep.",
       greScore: 328,
       designation: "",
       name: "Siddharth Kumar",

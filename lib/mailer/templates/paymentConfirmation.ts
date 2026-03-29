@@ -25,7 +25,7 @@ You can log in to your dashboard to start your preparation immediately.
 If you have any questions regarding your enrollment or need assistance, feel free to reply to this email.
 
 Wishing you a high GRE score,
-Team Punit Mishra Prep`;
+Team GRE Prep`;
 }
 
 export function htmlTemplate(
@@ -49,7 +49,7 @@ export function htmlTemplate(
 <table border=0 cellpadding=0 cellspacing=0 width=100% style="max-width:600px;border:1px solid #333;border-radius:5px;overflow:hidden">
 <tr>
 <td align=center style="padding:40px 20px;background-color:#081329">
-<img src=https://www.punitmishraprep.com/icons/logo-cropped.png alt="Punit Mishra Prep" width=200 style=display:block;font-family:Helvetica,Arial,sans-serif;color:#fff;font-size:20px>
+<img src=https://www.punitmishraprep.com/icons/logo-cropped.png alt="GRE Prep" width=200 style=display:block;font-family:Helvetica,Arial,sans-serif;color:#fff;font-size:20px>
 </td>
 </tr>
 <tr>
@@ -89,7 +89,7 @@ If you have any questions regarding your enrollment or need assistance, feel fre
 </p>
 <p style=margin:0>
 Wishing you a high GRE score,<br>
-<strong>Team Punit Mishra Prep</strong>
+<strong>Team GRE Prep</strong>
 </p>
 </td>
 </tr>

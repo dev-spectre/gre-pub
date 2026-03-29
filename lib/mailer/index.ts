@@ -20,9 +20,9 @@ export async function sendEmailOtp(name: string, email: string, otp: string) {
   }
 
   const info = await transporter.sendMail({
-    from: '"Punit Mishra Prep" <noreply@punitmishraprep.com>',
+    from: '"GRE Prep" <noreply@punitmishraprep.com>',
     to: toAddress,
-    subject: "Verify your registration - Punit Mishra Prep",
+    subject: "Verify your registration - GRE Prep",
     text: otpTemplate.text(name, otp, OTP_AGE_IN_MINUTES),
     html: otpTemplate.html(name, otp, OTP_AGE_IN_MINUTES),
   });
@@ -46,9 +46,9 @@ export async function sendEmailPasswordResetLink(
   }
 
   const info = await transporter.sendMail({
-    from: '"Punit Mishra Prep" <noreply@punitmishraprep.com>',
+    from: '"GRE Prep" <noreply@punitmishraprep.com>',
     to: toAddress,
-    subject: "Reset your password - Punit Mishra Prep",
+    subject: "Reset your password - GRE Prep",
     text: passwordResetTemplate.text(email, token, TOKEN_AGE_IN_MINUTES, name),
     html: passwordResetTemplate.html(email, token, TOKEN_AGE_IN_MINUTES, name),
   });
@@ -72,7 +72,7 @@ export async function sendPaymentConfirmation(
   }
 
   const info = await transporter.sendMail({
-    from: '"Punit Mishra Prep" <noreply@punitmishraprep.com>',
+    from: '"GRE Prep" <noreply@punitmishraprep.com>',
     to: toAddress,
     subject: "Payment Confirmation - GRE Universe Course",
     text: paymentConfirmationTemplate.text(transactionId, amount, paymentDate, name),

@@ -11,7 +11,7 @@ export function textTemplate(
 
   return `${!!name ? `Hello ${name}` : "Hello"},
 
-We received a request to reset your password for your Punit Mishra Prep account.
+We received a request to reset your password for your GRE Prep account.
 
 Click the link below to create a new password:
 
@@ -22,7 +22,7 @@ This link is valid for the next ${tokenAgeInMinutes} minutes.
 If you didn't ask to reset your password, you can safely ignore this email. Your account is secure.
 
 All the best,
-Team Punit Mishra Prep`;
+Team GRE Prep`;
 }
 
 export function htmlTemplate(
@@ -51,13 +51,13 @@ export function htmlTemplate(
 <table border=0 cellpadding=0 cellspacing=0 width=100% style="max-width:600px;border:1px solid #333;border-radius:5px;overflow:hidden">
 <tr>
 <td align=center style="padding:40px 20px;background-color:#081329">
-<img src="https://www.punitmishraprep.com/icons/logo-cropped.png" alt="Punit Mishra Prep" width=200 style=display:block;font-family:Helvetica,Arial,sans-serif;color:#fff;font-size:20px>
+<img src="https://www.punitmishraprep.com/icons/logo-cropped.png" alt="GRE Prep" width=200 style=display:block;font-family:Helvetica,Arial,sans-serif;color:#fff;font-size:20px>
 </td>
 </tr>
 <tr>
 <td align=left style="padding:40px 40px 20px 40px;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;line-height:1.6">
 <p style="margin:0 0 20px 0">${!!name ? `Hello ${name}` : "Hello"},</p>
-<p style="margin:0 0 20px 0">We received a request to reset your password for your Punit Mishra Prep account.</p>
+<p style="margin:0 0 20px 0">We received a request to reset your password for your GRE Prep account.</p>
 <p style="margin:0 0 30px 0">Click the link below to reset your password:</p>
 <table border=0 cellspacing=0 cellpadding=0>
 <tr>
@@ -73,7 +73,7 @@ This link is valid for the next ${tokenAgeInMinutes} minutes. If you didn't ask 
 </p>
 <p style=margin:0>
 All the best,<br>
-Team Punit Mishra Prep
+Team GRE Prep
 </p>
 </td>
 </tr>

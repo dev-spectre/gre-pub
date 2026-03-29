@@ -33,7 +33,7 @@ export default function Navbar() {
           <img
             className="h-12"
             src="/icons/logo-cropped.png"
-            alt="Punit Mishra Prep Logo"
+            alt="GRE Prep Logo"
           />
         </Link>
 
@@ -157,7 +157,7 @@ export function FooterNav() {
             <img
               className="h-12"
               src="/icons/logo-cropped.png"
-              alt="Punit Mishra Prep Logo"
+              alt="GRE Prep Logo"
             />
           </Link>
 

@@ -5,7 +5,7 @@ export function textTemplate(
 ) {
   return `${!!name ? `Hello ${name}` : "Hello"},
 
-Thank you for registering with Punit Mishra Prep.
+Thank you for registering with GRE Prep.
 
 Here is your One-Time Password (OTP) to complete your sign-up:
 
@@ -15,7 +15,7 @@ This OTP is valid for the next ${otpAgeInMinutes} minutes. Do not share this cod
 
 If you did not initiate this registration, please ignore this email.
 
-All the best, Team Punit Mishra Prep`;
+All the best, Team GRE Prep`;
 }
 
 export function htmlTemplate(
@@ -38,13 +38,13 @@ export function htmlTemplate(
 <table border=0 cellpadding=0 cellspacing=0 width=100% style="max-width:600px;border:1px solid #333;border-radius:5px;overflow:hidden">
 <tr>
 <td align=center style="padding:40px 20px;background-color:#081329">
-<img src="https://www.punitmishraprep.com/icons/logo-cropped.png" alt="Punit Mishra Prep" width=200 style=display:block;font-family:Helvetica,Arial,sans-serif;color:#fff;font-size:20px>
+<img src="https://www.punitmishraprep.com/icons/logo-cropped.png" alt="GRE Prep" width=200 style=display:block;font-family:Helvetica,Arial,sans-serif;color:#fff;font-size:20px>
 </td>
 </tr>
 <tr>
 <td align=left style="padding:40px 40px 20px 40px;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;line-height:1.6">
 <p style="margin:0 0 20px 0">${!!name ? `Hello ${name}` : "Hello"},</p>
-<p style="margin:0 0 20px 0">Thank you for registering with Punit Mishra Prep.</p>
+<p style="margin:0 0 20px 0">Thank you for registering with GRE Prep.</p>
 <p style="margin:0 0 10px 0">Here is your One-Time Password (OTP) to complete your sign-up:</p>
 <p style="margin:0 0 20px 0;font-size:18px">
 <strong>OTP: ${otp}</strong>
@@ -57,7 +57,7 @@ If you did not initiate this registration, please ignore this email.
 </p>
 <p style=margin:0>
 All the best,<br>
-Team Punit Mishra Prep
+Team GRE Prep
 </p>
 </td>
 </tr>

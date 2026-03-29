@@ -10,10 +10,10 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Dashboard - Punit Mishra Prep",
+  title: "Dashboard - GRE Prep",
   description: "Access your GRE prep dashboard. Learn with the best GRE strategies from a 337/340 scorer.",
   openGraph: {
-    title: "Dashboard - Punit Mishra Prep",
+    title: "Dashboard - GRE Prep",
     description: "Your personalized GRE learning dashboard with courses, mock tests, and study materials.",
     url: "https://punitmishraprep.com/dashboard",
     type: "website",
@@ -22,13 +22,13 @@ export const metadata: Metadata = {
         url: "https://punitmishraprep.com/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Punit Mishra Prep Dashboard",
+        alt: "GRE Prep Dashboard",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dashboard - Punit Mishra Prep",
+    title: "Dashboard - GRE Prep",
     description: "Your personalized GRE learning dashboard.",
     images: ["https://punitmishraprep.com/og-image.png"],
   },
