@@ -13,7 +13,7 @@ const montserrat = Montserrat({
 export const metadata: Metadata = {
   title: "GRE Prep - GRE Courses & 1:1 Tutoring | 337/340 Score",
   description:
-    "GRE Prep: Your complete GRE prep solution. Join the GRE Universe Course or get 1:1 tutoring from Punit Mishra, a 337/340 GRE scorer.",
+    "GRE Prep: Your complete GRE prep solution. Join the GRE Universe Course or get 1:1 tutoring from Abhishek Dallas, a 337/340 GRE scorer.",
   icons: {
     icon: "/icons/favicon.png",
     shortcut: "/icons/favicon.png",

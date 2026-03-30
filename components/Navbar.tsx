@@ -30,11 +30,7 @@ export default function Navbar() {
     <div className="font-montserrat sticky top-0 right-0 left-0 z-60 bg-gradient-to-b from-[#081329] to-[#081329]">
       <nav className="px-fluid-container relative flex items-center justify-between py-4 text-white">
         <Link href="/" className="text-2xl font-[900]">
-          <img
-            className="h-12"
-            src="/icons/logo-cropped.png"
-            alt="GRE Prep Logo"
-          />
+          GRE Prep
         </Link>
 
         <ul className="text-nav-0 hidden gap-8 font-[600] capitalize min-[1240px]:flex">
@@ -154,11 +150,7 @@ export function FooterNav() {
         {/* Header */}
         <div className="mb-5 flex items-center justify-between border-b border-b-white pb-8">
           <Link href="/" className="text-2xl font-[900]">
-            <img
-              className="h-12"
-              src="/icons/logo-cropped.png"
-              alt="GRE Prep Logo"
-            />
+            GRE Prep
           </Link>
 
           <ul className="flex items-center gap-3 sm:gap-8">
@@ -252,7 +244,7 @@ export function FooterNav() {
             <div>
               <h4 className="mb-2 text-lg font-[500] md:text-xl">Mail</h4>
               <p className="text-base text-[#A19FBA] md:text-lg">
-                hello@punitmishraprep.com
+                hello@greprep.com
               </p>
             </div>
             <div>
@@ -409,4 +401,3 @@ export function DashboardNavbar() {
     </div>
   );
 }
-

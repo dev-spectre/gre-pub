@@ -180,7 +180,7 @@ export default function Home() {
               </div>
               <div className="col-span-2">
                 <h3 className="text-xl-0 mb-6 font-[900] text-[#1B438F]">
-                  Punit Mishra
+                  Abhishek Dallas
                 </h3>
                 <ul className="divide-y divide-[#1B438F33] border-y border-y-[#1B438F33] text-[#1F1D39]">
                   {about.map((point, index) => (

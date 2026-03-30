@@ -108,7 +108,7 @@ export default function Hero() {
             href="#instructor"
             className="text-sm-0 mt-3 inline-block rounded-full bg-white px-5 py-2 font-[600] text-[#505866]"
           >
-            Punit Mishra GRE: 337/340
+            Abhishek Dallas GRE: 337/340
           </a>
         </div>
       </section>
