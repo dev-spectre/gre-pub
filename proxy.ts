@@ -9,7 +9,7 @@ export async function proxy(req: NextRequest) {
   }
 
   if (req.url.includes("/dashboard") && !token.hasPaid) {
-    return NextResponse.redirect(new URL(`https://pages.razorpay.com/pl_SIjHdXZ7u3cFsR/view?email=${token.email}`));
+    return NextResponse.redirect(new URL(`https://pages.razorpay.com/pl_S69blD7VGmwnK1/view?email=${token.email}`));
   }
 
   return NextResponse.next();
